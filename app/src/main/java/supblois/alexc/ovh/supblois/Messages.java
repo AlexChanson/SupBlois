@@ -9,6 +9,14 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.concurrent.ExecutionException;
+
+import supblois.alexc.ovh.supblois.network.NetTask;
+
 public class Messages extends AppCompatActivity {
 
     @Override
@@ -22,8 +30,14 @@ public class Messages extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                NetTask netTask = new NetTask();
+                netTask.execute();
+                try {
+                    Snackbar.make(view, netTask.get(), Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
