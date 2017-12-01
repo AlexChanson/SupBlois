@@ -30,14 +30,7 @@ public class Messages extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NetTask netTask = new NetTask();
-                netTask.execute();
-                try {
-                    Snackbar.make(view, netTask.get(), Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
+
             }
         });
     }
