@@ -12,7 +12,10 @@ public class NetTask extends AsyncTask<Command, Integer, Object> {
     @Override
     protected Object doInBackground(Command... commands) {
         Connexion c = new Connexion();
-        Object res = c.sendCommand(commands[0]);
-        return res;
+        if (c.open()){
+            Object res = c.sendCommand(commands[0]);
+            return res;
+        }
+        return "CONNEXION_ERROR";
     }
 }
