@@ -24,6 +24,7 @@ public class Login extends AppCompatActivity {
     private ImageView loginImageView;
     private TextView accountTextView;
     private TextView passwordTextView;
+    private TextView accountNotExists;
     private EditText accountEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -33,6 +34,7 @@ public class Login extends AppCompatActivity {
         loginImageView = findViewById(R.id.loginImageView);
         accountTextView = findViewById(R.id.accountLoginTextView);
         passwordTextView = findViewById(R.id.passwordLoginTextView);
+        accountNotExists = findViewById(R.id.accountNotExistsTextView);
         accountEditText = findViewById(R.id.accountLoginEditText);
         passwordEditText = findViewById(R.id.passwordLoginEditText);
         loginButton = findViewById(R.id.loginButton);
