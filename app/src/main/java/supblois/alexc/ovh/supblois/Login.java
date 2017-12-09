@@ -10,6 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import supblois.alexc.ovh.supblois.network.Command;
 import supblois.alexc.ovh.supblois.network.NetTask;
@@ -47,11 +49,12 @@ public class Login extends AppCompatActivity {
                 netTask.execute(cmd);
                 Object ret = null;
                 try {
-                    ret = netTask.get();
-                    System.out.println(ret.toString());
+                    ret = netTask.get(1, TimeUnit.SECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
                     e.printStackTrace();
                 }
 
