@@ -62,7 +62,7 @@ public class Connexion {
             e.printStackTrace();
         }
         if (result.equals("ERROR"))
-            return null;
+            return "ERROR";
         return new Gson().fromJson(result, c.getExpected());
     }
 
