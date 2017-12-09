@@ -4,7 +4,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -17,22 +21,34 @@ import supblois.alexc.ovh.supblois.network.Command;
 import supblois.alexc.ovh.supblois.network.NetTask;
 
 public class Login extends AppCompatActivity {
-    TextView login, password;
+    private ImageView loginImageView;
+    private TextView accountTextView;
+    private TextView passwordTextView;
+    private EditText accountEditText;
+    private EditText passwordEditText;
+    private Button loginButton;
+    private Button createAccountButton;
+
+    public void init() {
+        loginImageView = findViewById(R.id.loginImageView);
+        accountTextView = findViewById(R.id.accountLoginTextView);
+        passwordTextView = findViewById(R.id.passwordLoginTextView);
+        accountEditText = findViewById(R.id.accountLoginEditText);
+        passwordEditText = findViewById(R.id.passwordLoginEditText);
+        loginButton = findViewById(R.id.loginButton);
+        createAccountButton = findViewById(R.id.createAccountLoginButton);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        login = findViewById(R.id.login_phoneNB);
-        password = findViewById(R.id.login_password);
-
-        Button signIn = findViewById(R.id.login_sign_in_bt);
-        signIn.setOnClickListener(new View.OnClickListener() {
+        init();
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nb = login.getText().toString();
-                String pwd =  password.getText().toString();
+                String nb = accountEditText.getText().toString();
+                String pwd =  passwordEditText.getText().toString();
 
                 String hash = "";
 
@@ -57,7 +73,6 @@ public class Login extends AppCompatActivity {
                 } catch (TimeoutException e) {
                     e.printStackTrace();
                 }
-
 
                 //TODO Handle login
                 System.out.println(ret.toString());

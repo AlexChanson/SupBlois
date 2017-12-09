@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/loginImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <TextView
+        android:id="@+id/createTextView"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
-        android:src="@mipmap/ic_launcher_round" />
+        android:layout_marginTop="65dp"
+        tools:text="@string/create_account"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/accountLoginEditText"
+        android:id="@+id/accountCreateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -24,16 +27,16 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/passwordLoginTextView"
+        android:id="@+id/accountCreateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="256dp"
-        android:textAlignment="center"
-        tools:text="@string/password" />
+        android:layout_marginTop="150dp"
+        tools:text="@string/account"
+        android:textAlignment="center" />
 
     <EditText
-        android:id="@+id/passwordLoginEditText"
+        android:id="@+id/passwordCreateEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -43,38 +46,26 @@
         android:text="" />
 
     <TextView
-        android:id="@+id/accountLoginTextView"
+        android:id="@+id/passwordCreateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:text="account"
-        android:textAlignment="center"
-        tools:text="@string/account" />
+        android:layout_marginTop="256dp"
+        tools:text="@string/password"
+        android:textAlignment="center" />
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:id="@+id/createAccountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="350dp"
-        android:textSize="10dp"
-        tools:text="@string/login" />
-
-    <Button
-        android:id="@+id/createAccountLoginButton"
-        android:layout_width="125dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="390dp"
-        android:textSize="10dp"
         tools:text="@string/create_account" />
 
     <TextView
-        android:id="@+id/accountNotExistsTextView"
+        android:id="@+id/accountAlreadyExistsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/accountLoginEditText"
-        android:layout_below="@+id/loginImageView"
-        android:layout_marginTop="12dp" />
+        android:layout_alignStart="@+id/accountCreateEditText"
+        android:layout_below="@+id/createTextView" />
 </RelativeLayout>
