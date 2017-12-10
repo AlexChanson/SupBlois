@@ -7,7 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Create extends AppCompatActivity implements View.OnClickListener{
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import supblois.alexc.ovh.supblois.dao.MyDbManager;
+import supblois.alexc.ovh.supblois.dao.RegAccount;
+
+public class Create extends AppCompatActivity {
     private TextView createTextView;
     private TextView accountAlreadyExists;
     private TextView accountTextView;
@@ -15,7 +21,7 @@ public class Create extends AppCompatActivity implements View.OnClickListener{
     private TextView passwordTextView;
     private EditText passwordEditText;
     private Button createButton;
-
+    private MyDbManager dbManager;
     //TODO
 
     public void init() {
@@ -26,6 +32,12 @@ public class Create extends AppCompatActivity implements View.OnClickListener{
         passwordTextView = (TextView) findViewById(R.id.passwordCreateTextView);
         passwordEditText = (EditText) findViewById(R.id.passwordCreateEditText);
         createButton = (Button) findViewById(R.id.createAccountButton);
+        dbManager = MyDbManager.getInstance(this);
+        try {
+            dbManager.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -33,10 +45,19 @@ public class Create extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
         init();
-    }
 
-    @Override
-    public void onClick(View view) {
-        finish();
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<RegAccount> accounts = dbManager.getAccountDAO().getAll();
+                for (int i=0; i<accounts.size();i++) {
+                    System.out.println(accounts.get(i).firstName);
+                    System.out.println(accounts.get(i).lastName);
+                    System.out.println(accounts.get(i).num);
+
+                }
+                finish();
+            }
+        });
     }
 }
