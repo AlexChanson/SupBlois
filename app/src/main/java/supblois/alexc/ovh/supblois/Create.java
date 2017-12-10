@@ -2,11 +2,12 @@ package supblois.alexc.ovh.supblois;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class Create extends AppCompatActivity {
+public class Create extends AppCompatActivity implements View.OnClickListener{
     private TextView createTextView;
     private TextView accountAlreadyExists;
     private TextView accountTextView;
@@ -32,5 +33,10 @@ public class Create extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
         init();
+    }
+
+    @Override
+    public void onClick(View view) {
+        finish();
     }
 }
