@@ -44,7 +44,7 @@ public class MyDbManager implements IDbManager {
 
     @Override
     public IAccountDAO getAccountDAO() {
-        return null;
+        return new MyAccountDAO(database);
     }
 
     @Override
