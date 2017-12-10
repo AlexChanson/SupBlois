@@ -54,8 +54,6 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String nb = accountEditText.getText().toString();
                 String pwd =  passwordEditText.getText().toString();
-                Intent intentMessages = new Intent(Login.this, Messages.class);
-                startActivity(intentMessages);
                 String hash = "";
 
                 try {
@@ -66,8 +64,7 @@ public class Login extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Command cmd = new Command("LOGIN", new Object[]{nb, hash});
-                cmd.setExpected(String.class);
+                Command cmd = new Command("LOGIN", new Object[]{nb, hash}, String.class);
                 NetTask netTask = new NetTask();
                 netTask.execute(cmd);
                 Object ret = null;
