@@ -1,5 +1,6 @@
 package supblois.alexc.ovh.supblois;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,7 @@ public class Login extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private Button createAccountButton;
+    private Intent intentCreate;
 
     public void init() {
         loginImageView = findViewById(R.id.loginImageView);
@@ -46,6 +48,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +81,14 @@ public class Login extends AppCompatActivity {
 
                 //TODO Handle login
                 System.out.println(ret.toString());
+            }
+        });
+
+        createAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intentCreate = new Intent(Login.this, Create.class);
+                startActivity(intentCreate);
             }
         });
     }
