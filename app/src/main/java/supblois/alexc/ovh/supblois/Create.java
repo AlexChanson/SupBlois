@@ -19,10 +19,10 @@ public class Create extends AppCompatActivity implements View.OnClickListener{
     //TODO
 
     public void init() {
-        createTextView = (TextView) findViewById(R.id.createTextView);
+        createTextView = (TextView) findViewById(R.id.addUserTextView);
         accountAlreadyExists = (TextView) findViewById(R.id.accountAlreadyExistsTextView);
         accountTextView = (TextView) findViewById(R.id.accountCreateTextView);
-        accountEditText = (EditText) findViewById(R.id.accountCreateEditText);
+        accountEditText = (EditText) findViewById(R.id.phoneNumberEditText);
         passwordTextView = (TextView) findViewById(R.id.passwordCreateTextView);
         passwordEditText = (EditText) findViewById(R.id.passwordCreateEditText);
         createButton = (Button) findViewById(R.id.createAccountButton);

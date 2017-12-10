@@ -5,7 +5,7 @@
     android:background="@drawable/background">
 
     <TextView
-        android:id="@+id/createTextView"
+        android:id="@+id/addUserTextView"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
@@ -18,7 +18,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/accountCreateEditText"
+        android:id="@+id/phoneNumberEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -69,6 +69,6 @@
         android:id="@+id/accountAlreadyExistsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/accountCreateEditText"
-        android:layout_below="@+id/createTextView" />
+        android:layout_alignStart="@+id/phoneNumberEditText"
+        android:layout_below="@+id/addUserTextView" />
 </RelativeLayout>

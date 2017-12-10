@@ -31,8 +31,8 @@ public class Messages extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent myIntent = new Intent(getBaseContext(), Login.class);
-                startActivity(myIntent);
+                Intent intentAdd = new Intent(getBaseContext(), Add.class);
+                startActivity(intentAdd);
             }
         });
     }

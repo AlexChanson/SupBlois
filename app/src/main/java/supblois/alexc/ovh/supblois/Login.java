@@ -54,7 +54,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String nb = accountEditText.getText().toString();
                 String pwd =  passwordEditText.getText().toString();
-
+                Intent intentMessages = new Intent(Login.this, Messages.class);
+                startActivity(intentMessages);
                 String hash = "";
 
                 try {
