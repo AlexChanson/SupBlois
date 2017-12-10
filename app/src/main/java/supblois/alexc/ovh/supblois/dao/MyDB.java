@@ -28,7 +28,7 @@ public class MyDB extends SQLiteOpenHelper {
     public static final String COLUMN_LOGGED_PSWD = "password";
 
     //Database info
-    private static final String DATABASE_NAME = "minimail.db";
+    private static final String DATABASE_NAME = "supblois.db";
     private static final int DATABASE_VERSION = 1;
 
     //Creation table request
