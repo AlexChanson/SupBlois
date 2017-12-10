@@ -1,6 +1,7 @@
 package supblois.alexc.ovh.supblois.dao;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Created by ben on 09/12/17.
@@ -8,13 +9,14 @@ import java.util.ArrayList;
 
 public interface IAccountDAO {
 
-    public abstract RegAccount getByNumber(String number);
-    public abstract ArrayList<RegAccount> getByFirstName(String firstName);
-    public abstract ArrayList<RegAccount> getByLastName(String lastName);
-    public abstract ArrayList<RegAccount> getAll();
-    public abstract void setFirstName(String number, String newFirstName);
-    public abstract void setLastName(String number, String newLastName);
-    public void setFirstAndLastName(String number, String newFirstName, String newLastName);
+    RegAccount getByNumber(String number);
+    ArrayList<RegAccount> getByFirstName(String firstName);
+    ArrayList<RegAccount> getByLastName(String lastName);
+    ArrayList<RegAccount> getAll();
+    void setFirstName(String number, String newFirstName);
+    void setLastName(String number, String newLastName);
+    void setFirstAndLastName(String number, String newFirstName, String newLastName);
+    boolean deleteByNumber(String number);
 
 
 }

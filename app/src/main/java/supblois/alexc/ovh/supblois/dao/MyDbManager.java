@@ -1,5 +1,6 @@
 package supblois.alexc.ovh.supblois.dao;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.sql.SQLException;
@@ -13,15 +14,19 @@ public class MyDbManager implements IDbManager {
     private SQLiteDatabase database;
     private MyDB dbhelper;
 
+    private IAccountDAO accountDAO;
+    private IMessageDAO messageDAO;
+    private IConnectedDAO connectedDAO;
+
     private static MyDbManager dbManager = null;
 
-    private MyDbManager(){
-
+    private MyDbManager(Context context){
+        dbhelper = new MyDB(context);
     }
 
-    public static MyDbManager getInstance(){
+    public static MyDbManager getInstance(Context context){
         if(dbManager == null){
-           dbManager = new MyDbManager();
+           dbManager = new MyDbManager(context);
         }
         return dbManager;
     }
@@ -29,6 +34,7 @@ public class MyDbManager implements IDbManager {
     @Override
     public void open() throws SQLException {
         database = dbhelper.getWritableDatabase();
+        accountDAO = new MyAccountDAO(database);
     }
 
     @Override
