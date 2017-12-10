@@ -26,6 +26,30 @@ public class MyAccountDAO implements IAccountDAO {
     }
 
     @Override
+    public void addAccount(String num) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MyDB.COLUMN_NUM, num);
+        database.insert(MyDB.TABLE_ACCOUNT, null, contentValues);
+    }
+
+    @Override
+    public void addAccount(String num, String firstname) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MyDB.COLUMN_NUM, num);
+        contentValues.put(MyDB.COLUMN_FIRSTNAME, firstname);
+        database.insert(MyDB.TABLE_ACCOUNT, null, contentValues);
+    }
+
+    @Override
+    public void addAccount(String num, String firstname, String lastname) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MyDB.COLUMN_NUM, num);
+        contentValues.put(MyDB.COLUMN_FIRSTNAME, firstname);
+        contentValues.put(MyDB.COLUMN_LASTNAME, lastname);
+        database.insert(MyDB.TABLE_ACCOUNT, null, contentValues);
+    }
+
+    @Override
     public RegAccount getByNumber(String number) {
         Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, allColumns, MyDB.COLUMN_NUM+"="+number,
                 null, null, null, null);

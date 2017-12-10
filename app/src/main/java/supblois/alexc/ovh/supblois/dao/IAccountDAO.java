@@ -9,6 +9,9 @@ import java.util.Optional;
 
 public interface IAccountDAO {
 
+    void addAccount(String num);
+    void addAccount(String num, String firstname);
+    void addAccount(String num, String firstname, String lastname);
     RegAccount getByNumber(String number);
     ArrayList<RegAccount> getByFirstName(String firstName);
     ArrayList<RegAccount> getByLastName(String lastName);
