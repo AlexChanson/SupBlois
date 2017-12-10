@@ -12,7 +12,7 @@ public class MyDB extends SQLiteOpenHelper {
     //Tables
     public static final String TABLE_ACCOUNT = "RegAccount";
     public static final String TABLE_MSG = "Messages";
-    public static final String TABLE_CONNECTION = "Connected";
+    public static final String TABLE_CONNECTED = "Connected";
 
     //columns
     public static final String COLUMN_NUM = "num";
@@ -24,11 +24,11 @@ public class MyDB extends SQLiteOpenHelper {
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_CONTENT = "content";
 
-    public static final String COLUMN_LOGGED_NUM = "num";
+    public static final String COLUMN_LOGGED_NUM = "logged_num";
     public static final String COLUMN_LOGGED_PSWD = "password";
 
     //Database info
-    private static final String DATABASE_NAME = "messager.db";
+    private static final String DATABASE_NAME = "minimail.db";
     private static final int DATABASE_VERSION = 1;
 
     //Creation table request
@@ -41,11 +41,11 @@ public class MyDB extends SQLiteOpenHelper {
             +
             "("
             +
-            COLUMN_NUM + "Text" + NOTNULL
+            COLUMN_NUM + " Text" + NOTNULL + ", PRIMARY KEY("+COLUMN_NUM+"), "
             +
-            COLUMN_FIRSTNAME
+            COLUMN_FIRSTNAME + " Text ,"
             +
-            COLUMN_LASTNAME
+            COLUMN_LASTNAME + " Text"
             +
             ");";
 
@@ -55,29 +55,36 @@ public class MyDB extends SQLiteOpenHelper {
             +
             "("
             +
-            COLUMN_MSG_ID
+            COLUMN_MSG_ID + " integer" + NOTNULL + ", "
             +
-            COLUMN_SENDER
+            COLUMN_SENDER + " Text" + NOTNULL + ", "
             +
-            COLUMN_DATE
+            COLUMN_DATE + " Text" + NOTNULL + ", "
             +
-            COLUMN_CONTENT
+            COLUMN_CONTENT + " Text" + NOTNULL + ", "
+            +
+            " PRIMARY KEY("+COLUMN_MSG_ID+","+COLUMN_SENDER+") "
             +
             ");";
 
+    private static final String CREATE_TABLE_CONNECTED = "create table " + TABLE_CONNECTED +
+            "("
+            +
+            COLUMN_LOGGED_NUM + " Text" + NOTNULL + ", "
+            +
+            COLUMN_LOGGED_PSWD + " Text ,"
+            + ");";
+
     private static final String DATABASE_CREATE = CREATE_TABLE_ACCOUNT + "\n" +
-            CREATE_TABLE_MSG;
+            CREATE_TABLE_MSG + "\n" +
+            CREATE_TABLE_CONNECTED;
 
     //Init of sqlhelper
     public MyDB(Context context) {
-        super(context
-                ,
-                DATABASE_NAME
-                ,
-                null
-                ,
-                DATABASE_VERSION
-        );
+        super(context,
+                DATABASE_NAME,
+                null,
+                DATABASE_VERSION);
     }
 
     @Override
@@ -89,9 +96,9 @@ public class MyDB extends SQLiteOpenHelper {
     @Override
     public void
     onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "
-                +
-                TABLE_ACCOUNT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MSG);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONNECTED);
         onCreate(db);
     }
 }
