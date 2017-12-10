@@ -24,6 +24,10 @@ public class Command{
         return type;
     }
 
+    public void setExpected(Class expected) {
+        this.expected = expected;
+    }
+
     public Class getExpected() {
         return expected;
     }

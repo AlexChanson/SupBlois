@@ -67,6 +67,7 @@ public class Login extends AppCompatActivity {
                 }
 
                 Command cmd = new Command("LOGIN", new Object[]{nb, hash});
+                cmd.setExpected(String.class);
                 NetTask netTask = new NetTask();
                 netTask.execute(cmd);
                 Object ret = null;
