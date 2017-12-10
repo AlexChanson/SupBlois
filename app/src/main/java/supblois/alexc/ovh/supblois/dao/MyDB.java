@@ -41,11 +41,11 @@ public class MyDB extends SQLiteOpenHelper {
             +
             "("
             +
-            COLUMN_NUM + " Text" + NOTNULL + ", PRIMARY KEY("+COLUMN_NUM+"), "
+            COLUMN_NUM + " Text" + NOTNULL + ", "
             +
             COLUMN_FIRSTNAME + " Text ,"
             +
-            COLUMN_LASTNAME + " Text"
+            COLUMN_LASTNAME + " Text" + ", PRIMARY KEY("+COLUMN_NUM+") "
             +
             ");";
 
