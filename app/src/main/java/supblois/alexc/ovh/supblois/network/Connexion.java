@@ -13,8 +13,10 @@ import java.net.UnknownHostException;
 
 public class Connexion {
     private static String serverAddress = "msgapp.alexc.ovh";
+    private static Connexion current = null;
 
     private Socket socket;
+    private boolean state = false;
     private PrintWriter writer;
     private BufferedReader input;
 
@@ -47,11 +49,13 @@ public class Connexion {
             }
             return false;
         }
-
+        state = true;
         return true;
     }
 
     public Object sendCommand(Command c){
+        if (state = false)
+            return null;
         String cmd = new Gson().toJson(c);
         writer.println(cmd);
         writer.flush();
@@ -69,5 +73,17 @@ public class Connexion {
     public void close(){
         writer.println("CLOSE");
         writer.flush();
+    }
+
+    public boolean isOpen(){
+        return state;
+    }
+
+    public static Connexion getCurrent() {
+        return current;
+    }
+
+    public static void setCurrent(Connexion current) {
+        Connexion.current = current;
     }
 }

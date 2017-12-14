@@ -11,8 +11,15 @@ import java.net.Socket;
 public class NetTask extends AsyncTask<Command, Integer, Object> {
     @Override
     protected Object doInBackground(Command... commands) {
-        Connexion c = new Connexion();
-        if (c.open()){
+        Connexion c;
+        if (Connexion.getCurrent() == null) {
+            c = new Connexion();
+            Connexion.setCurrent(c);
+        }else
+            c = Connexion.getCurrent();
+        if(!c.isOpen())
+            c.open();
+        if (c.isOpen()){
             Object res = c.sendCommand(commands[0]);
             return res;
         }
