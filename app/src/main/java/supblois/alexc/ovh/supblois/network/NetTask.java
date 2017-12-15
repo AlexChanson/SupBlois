@@ -20,9 +20,8 @@ public class NetTask extends AsyncTask<Command, Integer, Object> {
         if(!c.isOpen())
             c.open();
         if (c.isOpen()){
-            Object res = c.sendCommand(commands[0]);
-            return res;
+            return c.sendCommand(commands[0]);
         }
-        return "CONNEXION_ERROR";
+        return null;
     }
 }

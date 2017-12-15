@@ -20,7 +20,9 @@
         android:layout_marginTop="169dp"
         android:ems="10"
         android:inputType="phone"
-        android:text="" />
+        android:singleLine="true"
+        android:text=""
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/passwordLoginTextView"
@@ -40,7 +42,8 @@
         android:layout_marginTop="275dp"
         android:ems="10"
         android:inputType="textPassword"
-        android:text="" />
+        android:text=""
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/accountLoginTextView"
