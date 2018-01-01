@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface IConnectedDAO {
 
-    Optional<String> getPasswd(String num);
+    String getPasswd(String num);
     void updatePswd(String num, String passwd);
 }
