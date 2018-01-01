@@ -11,12 +11,12 @@ import java.util.HashMap;
 public interface IMessageDAO {
     public abstract ArrayList<Message> getAll();
     public abstract ArrayList<Message> getMsgFrom(long sender);
-    public abstract Message getLastMsgFrom(long sender);
-    public abstract HashMap<Long, Message> getAllLastMsg();
+    public abstract Message getLastMsgFrom(String sender);
+    public abstract ArrayList<Message> getAllLastMsg();
 
     public abstract void newMsg(Message msg);
-    public void newMsg(long msgid, long sender, Date date, String content);
+    public void newMsg(long msgid, String sender, Date date, String content);
 
-    public void deleteAllMsgFrom(long sender);
-    public abstract void keepOnlyLastMsg(long sender, long numberToKeep);
+    public void deleteAllMsgFrom(String sender);
+    public abstract void keepOnlyLastMsg(String sender, long numberToKeep);
 }

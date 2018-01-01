@@ -27,6 +27,9 @@ public class MyDB extends SQLiteOpenHelper {
     public static final String COLUMN_LOGGED_NUM = "logged_num";
     public static final String COLUMN_LOGGED_PSWD = "password";
 
+    //all colums
+    public static final String[] ALLCOLUMNS_MSG = {COLUMN_MSG_ID, COLUMN_SENDER, COLUMN_DATE, COLUMN_CONTENT};
+
     //Database info
     private static final String DATABASE_NAME = "supblois.db";
     private static final int DATABASE_VERSION = 1;

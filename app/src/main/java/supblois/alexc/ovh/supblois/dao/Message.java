@@ -9,11 +9,11 @@ import java.util.Date;
 
 public class Message {
     private long msgId; // unique dans une conversation, forme la clef avec senderId et receiverId
-    private long senderId;
+    private String senderId;
     private String content;
     private Date msgdate;
 
-    public Message(long msgId, long senderId, Date msgdate, String content) {
+    public Message(long msgId, String senderId, Date msgdate, String content) {
         this.msgId = msgId;
         this.senderId = senderId;
         this.content = content;
@@ -24,7 +24,7 @@ public class Message {
         return msgId;
     }
 
-    public long getSenderId() {
+    public String getSenderId() {
         return senderId;
     }
 
