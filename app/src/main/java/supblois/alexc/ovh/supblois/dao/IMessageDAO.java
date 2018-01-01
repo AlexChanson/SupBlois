@@ -10,9 +10,8 @@ import java.util.HashMap;
 
 public interface IMessageDAO {
     public abstract ArrayList<Message> getAll();
-    public abstract ArrayList<Message> getMsgFrom(long sender);
+    public abstract ArrayList<Message> getMsgFrom(String sender);
     public abstract Message getLastMsgFrom(String sender);
-    public abstract ArrayList<Message> getAllLastMsg();
 
     public abstract void newMsg(Message msg);
     public void newMsg(long msgid, String sender, Date date, String content);

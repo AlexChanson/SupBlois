@@ -24,13 +24,17 @@ public class MyMessageDAO implements IMessageDAO {
     }
 
     @Override
-    public ArrayList<Message> getAll() {
-        return null;
-    }
+    public ArrayList<Message> getMsgFrom(String sender) {
+        String filter = MyDB.COLUMN_SENDER+"="+sender;
+        ArrayList<Message> res = new ArrayList<>();
+        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, filter, null, null, null, null );
+        while (cur.moveToNext()){
+            Message msg = convertToMsg(cur);
+            res.add(msg);
+        }
+        cur.close();
+        return res;
 
-    @Override
-    public ArrayList<Message> getMsgFrom(long sender) {
-        return null;
     }
 
     /**
@@ -52,14 +56,14 @@ public class MyMessageDAO implements IMessageDAO {
     }
 
     @Override
-    public ArrayList<Message> getAllLastMsg() {
+    public ArrayList<Message> getAll() {
         ArrayList<Message> res = new ArrayList<>();
         Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, "*", null, null, null, null );
         while (cur.moveToNext()){
             Message msg = convertToMsg(cur);
             res.add(msg);
         }
-
+        cur.close();
         return res;
     }
 
