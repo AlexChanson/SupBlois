@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -19,12 +20,12 @@ import java.util.concurrent.ExecutionException;
 import supblois.alexc.ovh.supblois.network.NetTask;
 
 public class Messages extends AppCompatActivity {
+    private ListView listViewMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

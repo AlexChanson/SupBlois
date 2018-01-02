@@ -9,17 +9,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
-import supblois.alexc.ovh.supblois.network.Command;
-import supblois.alexc.ovh.supblois.network.NetTask;
+import supblois.alexc.ovh.supblois.network.NetFacade;
 
 public class Login extends AppCompatActivity {
     private ImageView loginImageView;
@@ -54,32 +48,9 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String nb = accountEditText.getText().toString();
                 String pwd =  passwordEditText.getText().toString();
-                String hash = "";
 
-                try {
-                    MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                    byte[] h = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
-                    hash = toHexString(h);
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-
-                Command cmd = new Command("LOGIN", new Object[]{nb, hash}, String.class);
-                NetTask netTask = new NetTask();
-                netTask.execute(cmd);
-                Object ret = null;
-                try {
-                    ret = netTask.get(1, TimeUnit.SECONDS);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (TimeoutException e) {
-                    e.printStackTrace();
-                }
-
-                //TODO Handle login
-                System.out.println(ret.toString());
+                //TODO Login handling
+                System.out.println(NetFacade.login(nb, Utility.hashSHA256(pwd)));
             }
         });
 
@@ -92,17 +63,5 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public static String toHexString(byte[] bytes) {
-        StringBuilder hexString = new StringBuilder();
 
-        for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.toHexString(0xFF & bytes[i]);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-
-        return hexString.toString();
-    }
 }
