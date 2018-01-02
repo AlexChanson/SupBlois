@@ -12,7 +12,7 @@ public class MyDB extends SQLiteOpenHelper {
     //Tables
     public static final String TABLE_ACCOUNT = "RegAccount";
     public static final String TABLE_MSG = "Messages";
-    public static final String TABLE_CONNECTED = "Connected";
+    public static final String TABLE_CONNECTED = "ConnectedAccount";
 
     //columns
     public static final String COLUMN_NUM = "num";
@@ -92,11 +92,23 @@ public class MyDB extends SQLiteOpenHelper {
                 DATABASE_VERSION);
     }
 
+    public void dropAll(SQLiteDatabase db){
+        System.out.println("Dropping tables");
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MSG);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONNECTED);
+    }
+
     @Override
     public void
     onCreate(SQLiteDatabase database) {
+        dropAll(database);
+
         System.out.println("onCreate: creating tables...");
-        database.execSQL(DATABASE_CREATE);
+        database.execSQL(CREATE_TABLE_ACCOUNT);
+        database.execSQL(CREATE_TABLE_CONNECTED);
+        database.execSQL(CREATE_TABLE_MSG);
+
         System.out.println("done:\n"+DATABASE_CREATE);
     }
 
@@ -104,9 +116,7 @@ public class MyDB extends SQLiteOpenHelper {
     public void
     onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         System.out.println("onUpgrade: upgrading tables...");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNT);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MSG);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONNECTED);
+        dropAll(db);
         onCreate(db);
     }
 }
