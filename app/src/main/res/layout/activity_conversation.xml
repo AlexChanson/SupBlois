@@ -20,4 +20,12 @@
         android:layout_alignTop="@+id/messageEditText"
         android:layout_toEndOf="@+id/messageEditText"
         android:text="@string/send_message" />
+
+    <ListView
+        android:id="@+id/listViewConversation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/messageEditText"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
