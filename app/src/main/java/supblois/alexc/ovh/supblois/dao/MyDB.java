@@ -34,7 +34,7 @@ public class MyDB extends SQLiteOpenHelper {
 
     //Database info
     private static final String DATABASE_NAME = "supblois.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     //Creation table request
 
