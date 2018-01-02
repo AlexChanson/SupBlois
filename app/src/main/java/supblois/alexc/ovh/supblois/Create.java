@@ -49,12 +49,8 @@ public class Create extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<RegAccount> accounts = dbManager.getAccountDAO().getAll();
-                for (int i=0; i<accounts.size();i++) {
-                    System.out.println(accounts.get(i).firstName);
-                    System.out.println(accounts.get(i).lastName);
-                    System.out.println(accounts.get(i).num);
-
+                if (!accountEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
+                dbManager.getConnectedDAO().updatePswd(accountEditText.getText().toString(), passwordEditText.getText().toString());
                 }
                 finish();
             }

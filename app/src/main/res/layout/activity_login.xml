@@ -22,7 +22,7 @@
         android:inputType="phone"
         android:singleLine="true"
         android:text=""
-        android:textColor="@android:color/white" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/passwordLoginTextView"
@@ -43,7 +43,7 @@
         android:ems="10"
         android:inputType="textPassword"
         android:text=""
-        android:textColor="@android:color/white" />
+        android:textColor="@color/text_color" />
 
     <TextView
         android:id="@+id/accountLoginTextView"
