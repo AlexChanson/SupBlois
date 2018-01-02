@@ -48,7 +48,7 @@ public class MyConnectedDao implements IConnectedDAO {
         Cursor cur = database.query(MyDB.TABLE_CONNECTED, MyDB.ALLCOLUMNS_CONNECTED,
                 null, null, null, null, null);
         while (cur.moveToNext()){
-            ret.add(new ConnectedAccount(cur.getString(1), cur.getString(2)));
+            ret.add(new ConnectedAccount(cur.getString(0), cur.getString(1)));
         }
 
         return ret;
