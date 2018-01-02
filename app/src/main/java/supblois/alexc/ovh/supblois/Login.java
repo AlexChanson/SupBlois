@@ -48,18 +48,9 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String nb = accountEditText.getText().toString();
                 String pwd =  passwordEditText.getText().toString();
-                String hash = "";
-
-                try {
-                    MessageDigest digest = MessageDigest.getInstance("SHA-256");
-                    byte[] h = digest.digest(pwd.getBytes(StandardCharsets.UTF_8));
-                    hash = toHexString(h);
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
 
                 //TODO Login handling
-                System.out.println(NetFacade.login(nb, hash));
+                System.out.println(NetFacade.login(nb, Utility.hashSHA256(pwd)));
             }
         });
 
@@ -72,17 +63,5 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public static String toHexString(byte[] bytes) {
-        StringBuilder hexString = new StringBuilder();
 
-        for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.toHexString(0xFF & bytes[i]);
-            if (hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-
-        return hexString.toString();
-    }
 }
