@@ -44,16 +44,26 @@ public class MyDbManager implements IDbManager {
 
     @Override
     public IAccountDAO getAccountDAO() {
-        return new MyAccountDAO(database);
+        if (accountDAO == null) {
+            accountDAO = new MyAccountDAO(database);
+        }
+        return accountDAO;
     }
 
     @Override
     public IConnectedDAO getConnectedDAO() {
-        return null;
+            if (connectedDAO == null){
+                connectedDAO = new MyConnectedDao(database) ;
+            }
+            return connectedDAO;
     }
 
     @Override
-    public IMessageDAO getMessageDAO() {
-        return null;
+    public IMessageDAO getMessageDAO(){
+            if (messageDAO == null){
+                messageDAO = new MyMessageDAO(database) ;
+            }
+
+        return messageDAO;
     }
 }
