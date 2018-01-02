@@ -24,6 +24,7 @@ public class Add extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO TEST
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_add);
         init();
