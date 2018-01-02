@@ -6,8 +6,8 @@ package supblois.alexc.ovh.supblois.dao;
 
 public class ConnectedAccount {
 
-    private String num;
-    private String passwd;
+    private final String num;
+    private final String passwd;
 
     public ConnectedAccount(String num, String passwd) {
         this.num = num;
