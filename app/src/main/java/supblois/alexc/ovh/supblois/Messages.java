@@ -46,10 +46,8 @@ public class Messages extends AppCompatActivity {
         init();
         List<RegAccount> regAccountsList = new ArrayList<>();
         regAccountsList = dbManager.getAccountDAO().getAll();
-        for (int i =0; i<regAccountsList.size(); i++) {
-            System.out.println(regAccountsList.get(i).getNum());
-        }
         myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList);
+        listViewMessage.setAdapter(myAdapterMessage);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
