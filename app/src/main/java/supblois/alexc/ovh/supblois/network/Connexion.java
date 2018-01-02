@@ -70,7 +70,7 @@ public class Connexion {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (result.equals("ERROR"))
+        if (result == null || result.equals("ERROR"))
             return "ERROR";
         return new Gson().fromJson(result, c.getExpected());
     }
