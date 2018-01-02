@@ -56,6 +56,9 @@ public class Login extends AppCompatActivity {
                     intentLogin = new Intent (Login.this, Messages.class);
                     startActivity(intentLogin);
                 }
+                else {
+                    System.out.println("login failed!");
+                }
             }
         });
 

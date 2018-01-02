@@ -30,7 +30,6 @@ public class Messages extends AppCompatActivity {
     private MyDbManager dbManager;
 
     public void init() {
-        listViewMessage = (ListView)findViewById(R.id.listViewMessage);
         dbManager = MyDbManager.getInstance(this);
         try {
             dbManager.open();
@@ -44,10 +43,12 @@ public class Messages extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
         init();
+        listViewMessage = (ListView)findViewById(R.id.listViewMessage);
         List<RegAccount> regAccountsList = new ArrayList<>();
         regAccountsList = dbManager.getAccountDAO().getAll();
         myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList);
         listViewMessage.setAdapter(myAdapterMessage);
+        myAdapterMessage.notifyDataSetChanged();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

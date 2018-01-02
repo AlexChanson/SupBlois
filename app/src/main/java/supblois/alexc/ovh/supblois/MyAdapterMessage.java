@@ -46,11 +46,10 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
     public View getView(int i, View view, ViewGroup viewGroup) {
         RegAccount regAccount = getItem(i);
 
-        if (view == null) {
-            LayoutInflater layoutInflater;
-            layoutInflater = LayoutInflater.from(getContext());
-            view = layoutInflater.inflate(R.layout.layout_messages, null);
-        }
+        LayoutInflater layoutInflater;
+        layoutInflater = LayoutInflater.from(getContext());
+        View rowView = layoutInflater.inflate(R.layout.layout_messages, viewGroup, false);
+
 
         if (regAccount != null) {
             textViewFirstName = (TextView) view.findViewById(R.id.textViewFirstName);
@@ -60,12 +59,18 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
         if (textViewFirstName != null) {
             textViewFirstName.setText(regAccount.getFirstName());
         }
+        else{
+            System.out.println("pas de firstname");
+        }
 
         if (textViewLastName != null) {
             textViewLastName.setText(regAccount.getLastName());
         }
+        else{
+            System.out.println("pas de lastname");
+        }
 
-        return view;
+        return rowView;
     }
 
     public Context getContext() {
