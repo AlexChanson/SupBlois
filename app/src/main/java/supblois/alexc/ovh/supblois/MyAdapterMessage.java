@@ -24,7 +24,9 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
     TextView textViewLastName;
 
     public MyAdapterMessage (Context context, int ressource,List<RegAccount> regAccountsList) {
-        super(context, ressource, regAccountsList);
+        super(context, ressource);
+        this.regAccountsList = regAccountsList;
+        this.context = context;
     }
 
     @Override
@@ -46,18 +48,20 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
     public View getView(int i, View view, ViewGroup viewGroup) {
         RegAccount regAccount = getItem(i);
 
-        LayoutInflater layoutInflater;
-        layoutInflater = LayoutInflater.from(getContext());
-        View rowView = layoutInflater.inflate(R.layout.layout_messages, viewGroup, false);
-
+        View rowView = view;
+        if (rowView == null){
+            LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+            rowView = layoutInflater.inflate(R.layout.layout_messages, viewGroup, false);
+        }
 
         if (regAccount != null) {
-            textViewFirstName = (TextView) view.findViewById(R.id.textViewFirstName);
-            textViewLastName = (TextView) view.findViewById(R.id.textViewLastName);
+            textViewFirstName = (TextView) rowView.findViewById(R.id.textViewFirstName);
+            textViewLastName = (TextView) rowView.findViewById(R.id.textViewLastName);
         }
 
         if (textViewFirstName != null) {
             textViewFirstName.setText(regAccount.getFirstName());
+            System.out.println("first name set!");
         }
         else{
             System.out.println("pas de firstname");

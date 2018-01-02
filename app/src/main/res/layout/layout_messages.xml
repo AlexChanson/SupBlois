@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/textViewLastName"
@@ -10,11 +12,12 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="75dp"
         android:layout_marginTop="25dp"
-        android:textAllCaps="true"
-        android:textColor="@color/text_color"
-        android:textSize="20dp"
         android:text="@string/last_name"
-        android:textStyle="bold" />
+        android:textAllCaps="true"
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Test" />
 
     <TextView
         android:id="@+id/textViewFirstName"
@@ -23,7 +26,8 @@
         android:layout_marginStart="220dp"
         android:layout_marginTop="25dp"
         android:text="@string/first_name"
-        android:textColor="@color/text_color"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textColor="@android:color/holo_blue_bright"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="Test2" />
 </RelativeLayout>

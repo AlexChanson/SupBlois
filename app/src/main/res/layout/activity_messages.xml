@@ -10,8 +10,10 @@
     <ListView
         android:id="@+id/listViewMessage"
         android:layout_width="wrap_content"
-        android:layout_height="511dp"
-        android:scrollbars="vertical" />
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:visibility="visible">
+    </ListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
