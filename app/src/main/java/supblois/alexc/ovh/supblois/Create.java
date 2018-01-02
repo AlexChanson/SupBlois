@@ -49,9 +49,11 @@ public class Create extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!accountEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
-                dbManager.getConnectedDAO().updatePswd(accountEditText.getText().toString(), passwordEditText.getText().toString());
-                }
+                //if (!accountEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
+                //dbManager.getConnectedDAO().updatePswd(accountEditText.getText().toString(), passwordEditText.getText().toString());
+                //}
+                dbManager.getAccountDAO().addAccount("0642522876", "Christopher", "VALLOT");
+                dbManager.getAccountDAO().addAccount("0684529347", "Ben", "CRULIS");
                 finish();
             }
         });

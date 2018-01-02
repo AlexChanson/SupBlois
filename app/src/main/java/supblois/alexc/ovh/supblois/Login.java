@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
     private Button loginButton;
     private Button createAccountButton;
     private Intent intentCreate;
+    private Intent intentLogin;
 
     public void init() {
         loginImageView = findViewById(R.id.loginImageView);
@@ -48,9 +49,13 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String nb = accountEditText.getText().toString();
                 String pwd =  passwordEditText.getText().toString();
-
                 //TODO Login handling
                 System.out.println(NetFacade.login(nb, Utility.hashSHA256(pwd)));
+                boolean login = NetFacade.login(nb, Utility.hashSHA256(pwd));
+                if (login) {
+                    intentLogin = new Intent (Login.this, Messages.class);
+                    startActivity(intentLogin);
+                }
             }
         });
 

@@ -15,17 +15,38 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import supblois.alexc.ovh.supblois.dao.MyDbManager;
+import supblois.alexc.ovh.supblois.dao.RegAccount;
 import supblois.alexc.ovh.supblois.network.NetTask;
 
 public class Messages extends AppCompatActivity {
     private ListView listViewMessage;
+    private MyAdapterMessage myAdapterMessage;
+    private MyDbManager dbManager;
+
+    public void init() {
+        listViewMessage = (ListView)findViewById(R.id.listViewMessage);
+        dbManager = MyDbManager.getInstance(this);
+        try {
+            dbManager.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messages);
+        init();
+        List<RegAccount> regAccountsList = new ArrayList<>();
+        regAccountsList = dbManager.getAccountDAO().getAll();
+        myAdapterMessage = new MyAdapterMessage(this, regAccountsList);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
