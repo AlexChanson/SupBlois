@@ -26,6 +26,7 @@ public class MyDbManager implements IDbManager {
 
     public static MyDbManager getInstance(Context context){
         if(dbManager == null){
+            System.out.println("getInstance: creating instance...");
            dbManager = new MyDbManager(context);
         }
         return dbManager;
@@ -33,6 +34,7 @@ public class MyDbManager implements IDbManager {
 
     @Override
     public void open() throws SQLException {
+        System.out.println("open: Accessing writable database...");
         database = dbhelper.getWritableDatabase();
         accountDAO = new MyAccountDAO(database);
         connectedDAO = new MyConnectedDao(database);

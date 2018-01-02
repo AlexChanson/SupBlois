@@ -95,12 +95,14 @@ public class MyDB extends SQLiteOpenHelper {
     @Override
     public void
     onCreate(SQLiteDatabase database) {
+        System.out.println("onCreate: creating tables...");
         database.execSQL(DATABASE_CREATE);
     }
 
     @Override
     public void
     onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        System.out.println("onUpgrade: upgrading tables...");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACCOUNT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MSG);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONNECTED);
