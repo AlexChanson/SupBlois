@@ -77,7 +77,7 @@ public class MyDB extends SQLiteOpenHelper {
             +
             COLUMN_LOGGED_NUM + " Text" + NOTNULL + ", "
             +
-            COLUMN_LOGGED_PSWD + " Text ,"
+            COLUMN_LOGGED_PSWD + " Text"
             + ");";
 
     private static final String DATABASE_CREATE = CREATE_TABLE_ACCOUNT + "\n" +
@@ -97,6 +97,7 @@ public class MyDB extends SQLiteOpenHelper {
     onCreate(SQLiteDatabase database) {
         System.out.println("onCreate: creating tables...");
         database.execSQL(DATABASE_CREATE);
+        System.out.println("done:\n"+DATABASE_CREATE);
     }
 
     @Override
