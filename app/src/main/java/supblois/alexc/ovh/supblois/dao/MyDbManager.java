@@ -35,6 +35,8 @@ public class MyDbManager implements IDbManager {
     public void open() throws SQLException {
         database = dbhelper.getWritableDatabase();
         accountDAO = new MyAccountDAO(database);
+        connectedDAO = new MyConnectedDao(database);
+        messageDAO = new MyMessageDAO(database);
     }
 
     @Override
@@ -44,26 +46,16 @@ public class MyDbManager implements IDbManager {
 
     @Override
     public IAccountDAO getAccountDAO() {
-        if (accountDAO == null) {
-            accountDAO = new MyAccountDAO(database);
-        }
         return accountDAO;
     }
 
     @Override
     public IConnectedDAO getConnectedDAO() {
-            if (connectedDAO == null){
-                connectedDAO = new MyConnectedDao(database) ;
-            }
-            return connectedDAO;
+        return connectedDAO;
     }
 
     @Override
     public IMessageDAO getMessageDAO(){
-            if (messageDAO == null){
-                messageDAO = new MyMessageDAO(database) ;
-            }
-
         return messageDAO;
     }
 }
