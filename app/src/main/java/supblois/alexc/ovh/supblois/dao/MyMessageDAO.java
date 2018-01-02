@@ -48,17 +48,17 @@ public class MyMessageDAO implements IMessageDAO {
 
 
     private static Message convertToMsg(Cursor cur){
-        long msgId = cur.getInt(1);
-        String sender = cur.getString(2);
-        Date date = Timestamp.valueOf(cur.getString(3));
-        String content = cur.getString(4);
+        long msgId = cur.getInt(0);
+        String sender = cur.getString(1);
+        Date date = Timestamp.valueOf(cur.getString(2));
+        String content = cur.getString(3);
         return new Message(msgId, sender, date, content);
     }
 
     @Override
     public ArrayList<Message> getAll() {
         ArrayList<Message> res = new ArrayList<>();
-        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, "*", null, null, null, null );
+        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, null, null, null, null, null );
         while (cur.moveToNext()){
             Message msg = convertToMsg(cur);
             res.add(msg);
