@@ -17,18 +17,23 @@ import supblois.alexc.ovh.supblois.dao.RegAccount;
 
 public class MyAdapterMessage extends BaseAdapter {
     private Context context;
-    private List<RegAccount> regAccountList = new ArrayList<>();
+    private List<RegAccount> regAccountsList = new ArrayList<>();
     TextView textViewFirstName;
     TextView textViewLastName;
 
+    public MyAdapterMessage (Context context, List<RegAccount> regAccountsList) {} {
+        this.context = context;
+        this.regAccountsList = regAccountsList;
+    }
+
     @Override
     public int getCount() {
-        return regAccountList.size();
+        return regAccountsList.size();
     }
 
     @Override
     public RegAccount getItem(int pos) {
-        return regAccountList.get(pos);
+        return regAccountsList.get(pos);
     }
 
     @Override
@@ -38,21 +43,53 @@ public class MyAdapterMessage extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        RegAccount p = getItem(i);
+        RegAccount regAccount = getItem(i);
 
-        if (p != null) {
+        if (regAccount != null) {
             textViewFirstName = (TextView) view.findViewById(R.id.textViewFirstName);
             textViewLastName = (TextView) view.findViewById(R.id.textViewLastName);
         }
 
         if (textViewFirstName != null) {
-            textViewFirstName.setText(p.getFirstName());
+            textViewFirstName.setText(regAccount.getFirstName());
         }
 
         if (textViewLastName != null) {
-            textViewLastName.setText(p.getLastName());
+            textViewLastName.setText(regAccount.getLastName());
         }
 
         return view;
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public List<RegAccount> getRegAccountsList() {
+        return regAccountsList;
+    }
+
+    public void setRegAccountsList(List<RegAccount> regAccountsList) {
+        this.regAccountsList = regAccountsList;
+    }
+
+    public TextView getTextViewFirstName() {
+        return textViewFirstName;
+    }
+
+    public void setTextViewFirstName(TextView textViewFirstName) {
+        this.textViewFirstName = textViewFirstName;
+    }
+
+    public TextView getTextViewLastName() {
+        return textViewLastName;
+    }
+
+    public void setTextViewLastName(TextView textViewLastName) {
+        this.textViewLastName = textViewLastName;
     }
 }
