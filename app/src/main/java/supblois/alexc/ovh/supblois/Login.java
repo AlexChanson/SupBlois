@@ -54,6 +54,7 @@ public class Login extends AppCompatActivity {
                 boolean login = NetFacade.login(nb, Utility.hashSHA256(pwd));
                 if (login) {
                     intentLogin = new Intent (Login.this, Messages.class);
+                    intentLogin.putExtra("id", nb);
                     startActivity(intentLogin);
                 }
                 else {
