@@ -4,7 +4,7 @@
     android:background="@drawable/background">
 
     <EditText
-        android:id="@+id/messageEditText"
+        android:id="@+id/editTextMessage"
         android:layout_width="300sp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -14,18 +14,18 @@
         android:text="" />
 
     <Button
-        android:id="@+id/sendButton"
+        android:id="@+id/buttonSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/messageEditText"
-        android:layout_toEndOf="@+id/messageEditText"
+        android:layout_alignTop="@+id/editTextMessage"
+        android:layout_toEndOf="@+id/editTextMessage"
         android:text="@string/send_message" />
 
     <ListView
         android:id="@+id/listViewConversation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/messageEditText"
+        android:layout_above="@+id/editTextMessage"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

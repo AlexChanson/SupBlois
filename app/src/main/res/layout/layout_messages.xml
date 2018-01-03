@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,32 +8,29 @@
 
     <TextView
         android:id="@+id/textViewFirstName"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="185dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
         android:layout_weight="1"
         android:text="@string/first_name"
         android:textColor="@color/text_color"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewLastName"
-        android:layout_width="match_parent"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="25dp"
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/last_name"
         android:textAllCaps="true"
         android:textColor="@color/text_color"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
-</LinearLayout>
+</RelativeLayout>
 
 

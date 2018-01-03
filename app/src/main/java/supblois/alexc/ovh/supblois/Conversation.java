@@ -1,18 +1,20 @@
 package supblois.alexc.ovh.supblois;
 
-import android.app.Application;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
+import supblois.alexc.ovh.supblois.network.NetFacade;
 
 public class Conversation extends AppCompatActivity {
     private EditText messageEditText;
@@ -22,8 +24,8 @@ public class Conversation extends AppCompatActivity {
     private MyAdapterConversation myAdapterConversation;
 
     public void init() {
-        messageEditText = (EditText) findViewById(R.id.messageEditText);
-        sendButton = (Button) findViewById(R.id.sendButton);
+        messageEditText = (EditText) findViewById(R.id.editTextMessage);
+        sendButton = (Button) findViewById(R.id.buttonSend);
         dbManager = MyDbManager.getInstance(this);
         List<Message> messagesList = dbManager.getMessageDAO().getAll();
         String id = null;
@@ -43,5 +45,14 @@ public class Conversation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
         init();
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (messageEditText.getText().toString() != null) {
+                    //TODO Envoyer message
+                }
+            }
+        });
     }
 }
