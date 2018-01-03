@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.io.BufferedInputStream;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.dao.RegAccount;
 import supblois.alexc.ovh.supblois.network.NetTask;
@@ -47,7 +49,15 @@ public class Messages extends AppCompatActivity {
         List<RegAccount> regAccountsList = dbManager.getAccountDAO().getAll();
         myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList);
         listViewMessage.setAdapter(myAdapterMessage);
+        listViewMessage.setOnItemClickListener((adapterView, view, i, l) -> {
+            Intent intent = new Intent(this, Conversation.class);
+            RegAccount reg = (RegAccount) adapterView.getItemAtPosition(i);
+            intent.putExtra("account", reg.getNum());
+            intent.putExtra("firstname", reg.getFirstName());
+            intent.putExtra("lastname", reg.getLastName());
+            startActivity(intent);
 
+        });
         myAdapterMessage.notifyDataSetChanged();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -69,6 +79,8 @@ public class Messages extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+        System.out.println("Test "+item.toString());
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {

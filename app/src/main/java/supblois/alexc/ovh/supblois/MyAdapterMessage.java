@@ -69,15 +69,10 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
         else {
             if (textViewFirstName != null) {
                 textViewFirstName.setText(regAccount.getFirstName());
-                System.out.println("first name set!");
-            } else {
-                System.out.println("pas de firstname");
             }
 
             if (textViewLastName != null) {
                 textViewLastName.setText(regAccount.getLastName());
-            } else {
-                System.out.println("pas de lastname");
             }
         }
         return rowView;
