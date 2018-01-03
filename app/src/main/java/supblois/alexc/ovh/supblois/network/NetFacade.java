@@ -48,7 +48,7 @@ public class NetFacade {
         }
     }
 
-    public static boolean pushMessage(Message msg, String number){
+    public static boolean pushMessage(String msg, String number){
         Command cmd = new Command("PUSH", new Object[]{msg, number}, boolean.class);
         return (boolean) Utility.getExpectedOrNull(cmd, 2);
     }

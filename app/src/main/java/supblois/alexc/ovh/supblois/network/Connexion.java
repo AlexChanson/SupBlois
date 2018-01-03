@@ -54,7 +54,7 @@ public class Connexion {
     public Object sendCommand(Command c){
         if (!c.type.equals("LOGIN")){
             Object[] temp = new Object[c.parameters.length + 1];
-            temp[0] = Token.token;
+            temp[0] = String.valueOf(Token.token);
             System.arraycopy(c.parameters, 0, temp, 1, c.parameters.length);
             c.parameters = temp;
         }
