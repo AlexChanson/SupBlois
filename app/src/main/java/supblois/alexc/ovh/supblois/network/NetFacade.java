@@ -61,6 +61,10 @@ public class NetFacade {
 
     public static boolean pushMessage(String msg, String number){
         Command cmd = new Command("PUSH", new Object[]{msg, number}, boolean.class);
-        return (boolean) Utility.getExpectedOrNull(cmd, 2);
+        try {
+            return (boolean) Utility.getExpectedOrNull(cmd, 2);
+        }catch (NullPointerException e){
+            return false;
+        }
     }
 }
