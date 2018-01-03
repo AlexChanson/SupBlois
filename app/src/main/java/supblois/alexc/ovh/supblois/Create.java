@@ -54,6 +54,7 @@ public class Create extends AppCompatActivity {
                 //}
                 dbManager.getAccountDAO().addAccount("0642522876", "Christopher", "VALLOT");
                 dbManager.getAccountDAO().addAccount("0684529347", "Ben", "CRULIS");
+                dbManager.getAccountDAO().addAccount("0247508670");
                 finish();
             }
         });

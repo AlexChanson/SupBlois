@@ -59,21 +59,27 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
             textViewLastName = (TextView) rowView.findViewById(R.id.textViewLastName);
         }
 
-        if (textViewFirstName != null) {
-            textViewFirstName.setText(regAccount.getFirstName());
-            System.out.println("first name set!");
-        }
-        else{
-            System.out.println("pas de firstname");
-        }
-
-        if (textViewLastName != null) {
-            textViewLastName.setText(regAccount.getLastName());
-        }
-        else{
-            System.out.println("pas de lastname");
+        if (regAccount.getFirstName() == null && regAccount.getLastName() == null) {
+            if (textViewLastName != null) {
+                textViewLastName.setText(regAccount.getNum());
+                textViewFirstName.setText("");
+            }
         }
 
+        else {
+            if (textViewFirstName != null) {
+                textViewFirstName.setText(regAccount.getFirstName());
+                System.out.println("first name set!");
+            } else {
+                System.out.println("pas de firstname");
+            }
+
+            if (textViewLastName != null) {
+                textViewLastName.setText(regAccount.getLastName());
+            } else {
+                System.out.println("pas de lastname");
+            }
+        }
         return rowView;
     }
 
