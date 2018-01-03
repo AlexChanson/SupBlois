@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.format.DateUtils;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -50,7 +51,7 @@ public class MyMessageDAO implements IMessageDAO {
     private static Message convertToMsg(Cursor cur){
         long msgId = cur.getInt(0);
         String sender = cur.getString(1);
-        Date date = Timestamp.valueOf(cur.getString(2));
+        Date date = new Date(cur.getLong(2));
         String content = cur.getString(3);
         return new Message(msgId, sender, date, content);
     }
@@ -69,15 +70,16 @@ public class MyMessageDAO implements IMessageDAO {
 
     @Override
     public void newMsg(Message msg) {
-        newMsg(msg.getMsgId(), msg.getSenderId(), msg.getDate(), msg.getContent());
+        newMsg(msg.getMsgId(), msg.getSenderId(), msg.getDate().getTime(), msg.getContent());
     }
 
     @Override
-    public void newMsg(long msgid, String sender, Date date, String content) {
+    public void newMsg(long msgid, String sender, long date, String content) {
         ContentValues cv = new ContentValues();
+
         cv.put(MyDB.COLUMN_MSG_ID, msgid);
         cv.put(MyDB.COLUMN_SENDER, sender);
-        cv.put(MyDB.COLUMN_DATE, date.toString());
+        cv.put(MyDB.COLUMN_DATE, date);
         cv.put(MyDB.COLUMN_CONTENT, content);
         database.insert(MyDB.TABLE_MSG, null, cv);
     }

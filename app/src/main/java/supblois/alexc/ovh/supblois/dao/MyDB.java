@@ -64,7 +64,7 @@ public class MyDB extends SQLiteOpenHelper {
             +
             COLUMN_SENDER + " Text" + NOTNULL + ", "
             +
-            COLUMN_DATE + " Text" + NOTNULL + ", "
+            COLUMN_DATE + " INTEGER" + NOTNULL + ", "
             +
             COLUMN_CONTENT + " Text" + NOTNULL + ", "
             +
