@@ -48,6 +48,17 @@ public class NetFacade {
         }
     }
 
+    public static List<Message> pullMessages(boolean pullAll, String filter){
+        List<Message> messageList = new ArrayList<Message>();
+        Command cmd = new Command("PULL", new Object[]{pullAll, filter}, messageList.getClass());
+        try {
+            return  (List<Message>) Utility.getExpectedOrNull(cmd, 5);
+        }catch (ClassCastException e){
+            System.err.println("Error retrieving messages !");
+            return null;
+        }
+    }
+
     public static boolean pushMessage(String msg, String number){
         Command cmd = new Command("PUSH", new Object[]{msg, number}, boolean.class);
         return (boolean) Utility.getExpectedOrNull(cmd, 2);
