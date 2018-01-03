@@ -1,8 +1,18 @@
 package supblois.alexc.ovh.supblois.network;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import supblois.alexc.ovh.supblois.Utility;
+import supblois.alexc.ovh.supblois.dao.Message;
 
 
 public class NetFacade {
@@ -25,5 +35,21 @@ public class NetFacade {
             }
         }
         return false;
+    }
+
+    public static List<Message> pullMessages(boolean pullAll){
+        List<Message> messageList = new ArrayList<Message>();
+        Command cmd = new Command("PULL", new Object[]{pullAll}, messageList.getClass());
+        try {
+            return  (List<Message>) Utility.getExpectedOrNull(cmd, 5);
+        }catch (ClassCastException e){
+            System.err.println("Error retrieving messages !");
+            return null;
+        }
+    }
+
+    public static boolean pushMessage(Message msg, String number){
+        Command cmd = new Command("PUSH", new Object[]{msg, number}, boolean.class);
+        return (boolean) Utility.getExpectedOrNull(cmd, 2);
     }
 }
