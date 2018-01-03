@@ -55,7 +55,12 @@ public class Messages extends AppCompatActivity {
             intent.putExtra("account", reg.getNum());
             intent.putExtra("firstname", reg.getFirstName());
             intent.putExtra("lastname", reg.getLastName());
-            startActivity(intent);
+            Intent parentIntent = getIntent();
+            if (parentIntent != null){
+                intent.putExtra("id", parentIntent.getStringExtra("id"));
+                startActivity(intent);
+            }
+
 
         });
         myAdapterMessage.notifyDataSetChanged();
