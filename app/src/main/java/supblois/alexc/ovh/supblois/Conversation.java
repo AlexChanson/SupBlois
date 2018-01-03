@@ -37,6 +37,7 @@ public class Conversation extends AppCompatActivity {
         String id = null;
         if (getMessageIntent != null){
             id = getMessageIntent.getStringExtra("id");
+            System.out.println(id);
         }
         myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
         listViewConversation.setAdapter(myAdapterConversation);
@@ -58,7 +59,8 @@ public class Conversation extends AppCompatActivity {
             public void onClick(View view) {
                 if (messageEditText.getText().toString() != null) {
                     NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
-                    messagesList.add(new Message(0,"1",new Date(0),messageEditText.getText().toString()));
+                    NetFacade.pullMessages(true);
+                    messagesList.add(new Message(0,getMessageIntent.getStringExtra("id"),new Date(0),messageEditText.getText().toString()));
                     messageEditText.setText("");
                 }
             }

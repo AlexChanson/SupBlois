@@ -60,8 +60,9 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
             textViewMe = (TextView) rowView.findViewById(R.id.textViewMe);
             textViewOther = (TextView) rowView.findViewById(R.id.textViewOther);
         }
+        System.out.println(message.getSenderId());
+        if (message.getSenderId().equals(id)) {
 
-        if (message.getSenderId() == id) {
             if (textViewMe != null) {
                 textViewMe.setText(message.getContent());
                 textViewOther.setText("");
@@ -72,7 +73,7 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
                 }
             }
         }
-        return view;
+        return rowView;
     }
 
     public Context getContext() {
