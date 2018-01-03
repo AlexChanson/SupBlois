@@ -25,9 +25,11 @@ public class Conversation extends AppCompatActivity {
         messageEditText = (EditText) findViewById(R.id.messageEditText);
         sendButton = (Button) findViewById(R.id.sendButton);
         dbManager = MyDbManager.getInstance(this);
-        List<Message> messagesList = new ArrayList<>();
-        messagesList = dbManager.getMessageDAO().getAll();
-        String id = getMessageIntent.getStringExtra("id");
+        List<Message> messagesList = dbManager.getMessageDAO().getAll();
+        String id = null;
+        if (getMessageIntent != null){
+            id = getMessageIntent.getStringExtra("id");
+        }
         myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
         try {
             dbManager.open();
