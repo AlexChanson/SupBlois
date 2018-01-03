@@ -25,7 +25,7 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
     private String id;
 
     public MyAdapterConversation (Context context, int ressource, List<Message> messagesList, String id) {
-        super(context, ressource, messagesList);
+        super(context, ressource);
         this.context = context;
         this.messagesList = messagesList;
         this.id = id;

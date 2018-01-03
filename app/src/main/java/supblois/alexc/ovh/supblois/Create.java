@@ -8,8 +8,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
+import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.dao.RegAccount;
 
@@ -55,6 +59,7 @@ public class Create extends AppCompatActivity {
                 dbManager.getAccountDAO().addAccount("0642522876", "Christopher", "VALLOT");
                 dbManager.getAccountDAO().addAccount("0684529347", "Ben", "CRULIS");
                 dbManager.getAccountDAO().addAccount("0247508670");
+
                 finish();
             }
         });

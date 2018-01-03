@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import java.sql.SQLException;
 import java.time.Instant;
@@ -19,20 +20,26 @@ import supblois.alexc.ovh.supblois.network.NetFacade;
 public class Conversation extends AppCompatActivity {
     private EditText messageEditText;
     private Button sendButton;
+    private ListView listViewConversation;
     private MyDbManager dbManager;
     private Intent getMessageIntent;
     private MyAdapterConversation myAdapterConversation;
+    private List<Message> messagesList;
 
     public void init() {
         messageEditText = (EditText) findViewById(R.id.editTextMessage);
         sendButton = (Button) findViewById(R.id.buttonSend);
+        listViewConversation = (ListView) findViewById(R.id.listViewConversation);
         dbManager = MyDbManager.getInstance(this);
-        List<Message> messagesList = dbManager.getMessageDAO().getAll();
+        getMessageIntent = getIntent();
+        messagesList = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
+
         String id = null;
         if (getMessageIntent != null){
             id = getMessageIntent.getStringExtra("id");
         }
         myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
+        listViewConversation.setAdapter(myAdapterConversation);
         try {
             dbManager.open();
         } catch (SQLException e) {
@@ -50,7 +57,9 @@ public class Conversation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (messageEditText.getText().toString() != null) {
-                    //TODO Envoyer message
+                    NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
+                    messagesList.add(new Message(0,"1",new Date(0),messageEditText.getText().toString()));
+                    messageEditText.setText("");
                 }
             }
         });
