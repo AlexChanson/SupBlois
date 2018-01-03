@@ -60,9 +60,9 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
         }
 
         if (regAccount.getFirstName() == null && regAccount.getLastName() == null) {
-            if (textViewLastName != null) {
-                textViewLastName.setText(regAccount.getNum());
-                textViewFirstName.setText("");
+            if (textViewFirstName != null) {
+                textViewFirstName.setText(regAccount.getNum());
+                textViewLastName.setText("");
             }
         }
 

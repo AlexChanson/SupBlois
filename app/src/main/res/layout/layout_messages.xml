@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/textViewFirstName"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="185dp"
         android:layout_marginTop="25dp"
-        android:gravity="center"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="10dp"
         android:layout_weight="1"
+        android:layout_marginStart="10dp"
         android:text="@string/first_name"
         android:textColor="@color/text_color"
         android:textSize="25sp"
@@ -21,11 +22,13 @@
 
     <TextView
         android:id="@+id/textViewLastName"
-        android:layout_width="185dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_alignBaseline="@+id/textViewFirstName"
+        android:layout_alignBottom="@+id/textViewFirstName"
+        android:layout_marginStart="20dp"
+        android:layout_toEndOf="@+id/textViewFirstName"
         android:layout_weight="1"
-        android:gravity="center"
         android:text="@string/last_name"
         android:textAllCaps="true"
         android:textColor="@color/text_color"
