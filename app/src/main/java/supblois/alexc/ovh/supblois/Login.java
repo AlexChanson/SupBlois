@@ -49,10 +49,10 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
                 String nb = accountEditText.getText().toString();
                 String pwd =  passwordEditText.getText().toString();
-                //TODO Login handling
-                System.out.println(NetFacade.login(nb, Utility.hashSHA256(pwd)));
+
                 boolean login = NetFacade.login(nb, Utility.hashSHA256(pwd));
                 if (login) {
+                    System.out.println("logged successfully!");
                     intentLogin = new Intent (Login.this, Messages.class);
                     intentLogin.putExtra("id", nb);
                     startActivity(intentLogin);
