@@ -10,7 +10,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="140dp"
         android:text="@string/add_user"
         android:textAlignment="center"
         android:textColor="@color/text_color"
@@ -21,7 +21,7 @@
         android:id="@+id/phoneNumberEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/phoneNumberTextView"
+        android:layout_marginTop="254dp"
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:inputType="textPersonName"
@@ -31,9 +31,8 @@
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addUserTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="235dp"
         android:text="@string/phone_number"
         android:textAlignment="center"
         android:textColor="@color/text_color" />
@@ -43,49 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/phoneNumberTextView"
-        android:layout_below="@+id/editTextLastName"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="340dp"
         android:text="@string/add_user" />
 
-    <EditText
-        android:id="@+id/editTextFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/phoneNumberEditText"
-        android:ems="10"
-        android:layout_marginTop="258dp"
-        android:textColor="@color/text_color"
-        android:inputType="textPersonName"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/textViewFirstName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textColor="@color/text_color"
-        android:layout_marginTop="240dp"
-        android:textAlignment="center"
-        android:text="@string/first_name" />
-
-    <EditText
-        android:id="@+id/editTextLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editTextFirstName"
-        android:layout_marginTop="350dp"
-        android:ems="10"
-        android:textColor="@color/text_color"
-        android:inputType="textPersonName"
-        android:text="" />
-
-    <TextView
-        android:id="@+id/textViewLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="332dp"
-        android:layout_alignStart="@id/textViewFirstName"
-        android:textAlignment="center"
-        android:text="@string/last_name"
-        android:textColor="@color/text_color" />
 </RelativeLayout>
