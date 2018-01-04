@@ -48,7 +48,7 @@ public class Add extends Activity {
         addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (phoneNumberEditText.getText().toString() != null) {
+                if (!phoneNumberEditText.getText().toString().equals("")) {
                     friend = NetFacade.addFriend(phoneNumberEditText.getText().toString());
                     if (friend != null) {
                         dbManager.getAccountDAO().addAccount(friend.phone, friend.prenom, friend.nom);

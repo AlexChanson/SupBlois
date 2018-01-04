@@ -63,7 +63,7 @@ public class Create extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (phoneNumberEditText.getText().toString() != null && passwordEditText.getText().toString() != null && firstNameEditText.getText().toString() != null && lastNameEditText.getText().toString() != null) {
+                if (!phoneNumberEditText.getText().toString().equals("") && !passwordEditText.getText().toString().equals("") && !firstNameEditText.getText().toString().equals("") && !lastNameEditText.getText().toString().equals("")) {
                     NetFacade.createAccount(phoneNumberEditText.getText().toString(), firstNameEditText.getText().toString(), lastNameEditText.getText().toString(), passwordEditText.getText().toString());
                 }
                 finish();
