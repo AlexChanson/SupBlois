@@ -16,6 +16,7 @@ import java.util.Date;
 import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.dao.RegAccount;
+import supblois.alexc.ovh.supblois.network.NetFacade;
 
 public class Create extends AppCompatActivity {
     private TextView createTextView;
@@ -53,12 +54,8 @@ public class Create extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if (!accountEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
-                //dbManager.getConnectedDAO().updatePswd(accountEditText.getText().toString(), passwordEditText.getText().toString());
-                //}
-                dbManager.getAccountDAO().addAccount("0642522876", "Christopher", "VALLOT");
-                dbManager.getAccountDAO().addAccount("0684529347", "Ben", "CRULIS");
-                dbManager.getAccountDAO().addAccount("0247508670");
+                if (accountEditText.getText().toString() != null && passwordEditText.getText().toString() != null) {
+            }
 
                 finish();
             }
