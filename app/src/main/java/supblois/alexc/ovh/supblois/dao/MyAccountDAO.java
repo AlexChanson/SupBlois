@@ -16,8 +16,6 @@ public class MyAccountDAO implements IAccountDAO {
 
     SQLiteDatabase database;
 
-    public static final String[] allColumns = {MyDB.COLUMN_NUM, MyDB.COLUMN_FIRSTNAME, MyDB.COLUMN_LASTNAME};
-
     public MyAccountDAO(SQLiteDatabase database) {
         this.database = database;
         if (database == null){
@@ -29,6 +27,9 @@ public class MyAccountDAO implements IAccountDAO {
     public void addAccount(String num) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(MyDB.COLUMN_NUM, num);
+        contentValues.put(MyDB.COLUMN_FIRSTNAME, "");
+        contentValues.put(MyDB.COLUMN_LASTNAME, "");
+        contentValues.put(MyDB.COLUMN_UNREAD, 0);
         database.insert(MyDB.TABLE_ACCOUNT, null, contentValues);
     }
 
@@ -37,6 +38,8 @@ public class MyAccountDAO implements IAccountDAO {
         ContentValues contentValues = new ContentValues();
         contentValues.put(MyDB.COLUMN_NUM, num);
         contentValues.put(MyDB.COLUMN_FIRSTNAME, firstname);
+        contentValues.put(MyDB.COLUMN_LASTNAME, "");
+        contentValues.put(MyDB.COLUMN_UNREAD, 0);
         database.insert(MyDB.TABLE_ACCOUNT, null, contentValues);
     }
 
@@ -46,16 +49,17 @@ public class MyAccountDAO implements IAccountDAO {
         contentValues.put(MyDB.COLUMN_NUM, num);
         contentValues.put(MyDB.COLUMN_FIRSTNAME, firstname);
         contentValues.put(MyDB.COLUMN_LASTNAME, lastname);
+        contentValues.put(MyDB.COLUMN_UNREAD, 0);
         database.insert(MyDB.TABLE_ACCOUNT, null, contentValues);
     }
 
     @Override
     public RegAccount getByNumber(String number) {
-        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, allColumns, MyDB.COLUMN_NUM+"="+number,
+        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, MyDB.COLUMN_NUM+"="+number,
                 null, null, null, null);
         if (cursor.getCount() >= 1){
             cursor.moveToNext();
-            RegAccount ret = new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+            RegAccount ret = new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3));
             cursor.close();
             return ret;
         }
@@ -66,13 +70,13 @@ public class MyAccountDAO implements IAccountDAO {
     @Override
     public ArrayList<RegAccount> getByFirstName(String firstName) {
         String filter = MyDB.COLUMN_FIRSTNAME+"="+firstName;
-        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, allColumns, filter, null, null, null, null );
+        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, filter, null, null, null, null );
 
         ArrayList<RegAccount> ret = new ArrayList<>();
 
         while (cursor.moveToNext()){
 
-            ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
+            ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3)));
         }
 
         return ret;
@@ -82,13 +86,13 @@ public class MyAccountDAO implements IAccountDAO {
     @Override
     public ArrayList<RegAccount> getByLastName(String lastName) {
         String filter = MyDB.COLUMN_LASTNAME+"="+lastName;
-        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, allColumns, filter, null, null, null, null );
+        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, filter, null, null, null, null );
 
         ArrayList<RegAccount> ret = new ArrayList<>();
 
         while (cursor.moveToNext()){
 
-            ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
+            ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3)));
         }
 
         return ret;
@@ -96,12 +100,12 @@ public class MyAccountDAO implements IAccountDAO {
 
     @Override
     public ArrayList<RegAccount> getAll() {
-        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, allColumns, null, null, null, null, null );
+        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, null, null, null, null, null );
 
         ArrayList<RegAccount> ret = new ArrayList<>();
 
         while (cursor.moveToNext()){
-            ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
+            ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3)));
         }
 
         return ret;
@@ -130,6 +134,14 @@ public class MyAccountDAO implements IAccountDAO {
         contentValues.put(MyDB.COLUMN_FIRSTNAME, newFirstName);
         contentValues.put(MyDB.COLUMN_LASTNAME, newLastName);
         database.update(MyDB.TABLE_ACCOUNT, contentValues, filter, null);
+    }
+
+    @Override
+    public void setUnreadMsg(String number, int unread) {
+        String filter = MyDB.COLUMN_NUM+"="+number;
+        ContentValues cv = new ContentValues();
+        cv.put(MyDB.COLUMN_UNREAD, unread);
+        database.update(MyDB.TABLE_ACCOUNT, cv, filter, null);
     }
 
     @Override

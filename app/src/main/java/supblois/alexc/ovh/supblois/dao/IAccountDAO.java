@@ -19,6 +19,7 @@ public interface IAccountDAO {
     void setFirstName(String number, String newFirstName);
     void setLastName(String number, String newLastName);
     void setFirstAndLastName(String number, String newFirstName, String newLastName);
+    void setUnreadMsg(String number, int unread);
     boolean deleteByNumber(String number);
 
 

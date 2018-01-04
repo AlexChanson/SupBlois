@@ -18,6 +18,7 @@ public class MyDB extends SQLiteOpenHelper {
     public static final String COLUMN_NUM = "num";
     public static final String COLUMN_FIRSTNAME = "firstName";
     public static final String COLUMN_LASTNAME = "lastName";
+    public static final String COLUMN_UNREAD = "unread";
 
     public static final String COLUMN_MSG_ID = "id";
     public static final String COLUMN_SENDER = "sender";
@@ -30,7 +31,7 @@ public class MyDB extends SQLiteOpenHelper {
     //all colums
     public static final String[] ALLCOLUMNS_MSG = {COLUMN_MSG_ID, COLUMN_SENDER, COLUMN_DATE, COLUMN_CONTENT};
     public static final String[] ALLCOLUMNS_CONNECTED = {COLUMN_LOGGED_NUM, COLUMN_LOGGED_PSWD};
-
+    public static final String[] ALLCOLUMNS_ACCOUNT = {COLUMN_NUM, COLUMN_FIRSTNAME, COLUMN_LASTNAME, COLUMN_UNREAD};
 
     //Database info
     private static final String DATABASE_NAME = "supblois.db";
@@ -48,9 +49,13 @@ public class MyDB extends SQLiteOpenHelper {
             +
             COLUMN_NUM + " Text" + NOTNULL + ", "
             +
-            COLUMN_FIRSTNAME + " Text ,"
+            COLUMN_FIRSTNAME + " Text " + NOTNULL + ", "
             +
-            COLUMN_LASTNAME + " Text" + ", PRIMARY KEY("+COLUMN_NUM+") "
+            COLUMN_LASTNAME + " Text " + NOTNULL + ", "
+            +
+            COLUMN_UNREAD + " integer " + NOTNULL + ", "
+            +
+            "PRIMARY KEY("+COLUMN_NUM+")"
             +
             ");";
 
@@ -77,7 +82,7 @@ public class MyDB extends SQLiteOpenHelper {
             +
             COLUMN_LOGGED_NUM + " Text" + NOTNULL + ", "
             +
-            COLUMN_LOGGED_PSWD + " Text"
+            COLUMN_LOGGED_PSWD + " Text" + NOTNULL
             + ");";
 
     private static final String DATABASE_CREATE = CREATE_TABLE_ACCOUNT + "\n" +

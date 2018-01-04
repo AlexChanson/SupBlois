@@ -8,11 +8,13 @@ public class RegAccount {
     public String num;
     public String firstName; // si vide, utiliser num pour l'affichage
     public String lastName;
+    public int unreadMsg;
 
-    public RegAccount(String num, String firstName, String lastName) {
+    public RegAccount(String num, String firstName, String lastName, int unread) {
         this.num = num;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.unreadMsg = unread;
     }
 
     public String getNum() {
@@ -27,9 +29,13 @@ public class RegAccount {
         return lastName;
     }
 
+    public int getUnreadMsg(){
+        return unreadMsg;
+    }
+
     // example of functional setter
     public static RegAccount updateNum(RegAccount reg, String num){
-        return new RegAccount(num, reg.getFirstName(), reg.getLastName());
+        return new RegAccount(num, reg.getFirstName(), reg.getLastName(), reg.getUnreadMsg());
     }
 
 
