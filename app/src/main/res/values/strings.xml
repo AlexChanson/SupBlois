@@ -13,5 +13,6 @@
     <string name="add_user"> Add User </string>
     <string name="phone_number"> phone number</string>
     <string name="send_message"> Send </string>
+    <string name="login_failed_msg">Wrong phone number or password</string>
 
 </resources>

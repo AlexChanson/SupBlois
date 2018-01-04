@@ -53,13 +53,14 @@ public class Login extends AppCompatActivity {
 
                 boolean login = NetFacade.login(nb, Utility.hashSHA256(pwd));
                 if (login) {
+                    NetFacade.registerFbToken(getApplicationContext());
                     System.out.println("logged successfully!");
                     intentLogin = new Intent (Login.this, Messages.class);
                     intentLogin.putExtra("id", nb);
                     startActivity(intentLogin);
                 }
                 else {
-                    accountNotExists.setText("*Wrong phone number or password");
+                    accountNotExists.setText(R.string.login_failed_msg);
                     accountNotExists.setTextColor(Color.RED);
                     System.out.println("login failed!");
                 }
