@@ -7,6 +7,7 @@
     <string name="password"> password </string>
     <string name="me"> me </string>
     <string name="other"> other </string>
+    <string name="receive_message"> receive </string>
     <string name="login"> login </string>
     <string name="create_account"> Create Account </string>
     <string name="add_user"> Add User </string>

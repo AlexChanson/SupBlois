@@ -5,21 +5,22 @@
 
     <EditText
         android:id="@+id/editTextMessage"
-        android:layout_width="300sp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/buttonSend"
         android:ems="10"
-        android:textColor="@color/text_color"
         android:inputType="textPersonName"
-        android:text="" />
+        android:text=""
+        android:textColor="@color/text_color" />
 
     <Button
         android:id="@+id/buttonSend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/editTextMessage"
-        android:layout_toEndOf="@+id/editTextMessage"
+        android:layout_below="@+id/listViewConversation"
+        android:layout_toStartOf="@+id/buttonReceive"
         android:text="@string/send_message" />
 
     <ListView
@@ -29,4 +30,12 @@
         android:layout_above="@+id/editTextMessage"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/buttonReceive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/listViewConversation"
+        android:text="@string/receive_message" />
 </RelativeLayout>
