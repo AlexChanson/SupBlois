@@ -78,6 +78,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/accountLoginEditText"
-        android:layout_below="@+id/loginImageView"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="325dp" />
 </RelativeLayout>

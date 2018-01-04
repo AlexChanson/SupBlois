@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,25 +18,33 @@ import java.util.Date;
 import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.dao.RegAccount;
+import supblois.alexc.ovh.supblois.network.NetFacade;
 
 public class Create extends AppCompatActivity {
     private TextView createTextView;
     private TextView accountAlreadyExists;
-    private TextView accountTextView;
-    private EditText accountEditText;
+    private TextView phoneNumberTextView;
+    private EditText phoneNumberEditText;
     private TextView passwordTextView;
     private EditText passwordEditText;
+    private TextView firstNameTextView;
+    private EditText firstNameEditText;
+    private TextView lastNameTextView;
+    private EditText lastNameEditText;
     private Button createButton;
     private MyDbManager dbManager;
-    //TODO
 
     public void init() {
         createTextView = (TextView) findViewById(R.id.addUserTextView);
         accountAlreadyExists = (TextView) findViewById(R.id.accountAlreadyExistsTextView);
-        accountTextView = (TextView) findViewById(R.id.accountCreateTextView);
-        accountEditText = (EditText) findViewById(R.id.phoneNumberEditText);
+        phoneNumberTextView = (TextView) findViewById(R.id.phoneNumberTextView);
+        phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
         passwordTextView = (TextView) findViewById(R.id.passwordCreateTextView);
         passwordEditText = (EditText) findViewById(R.id.passwordCreateEditText);
+        firstNameTextView = (TextView) findViewById(R.id.textViewFirstName);
+        firstNameEditText = (EditText) findViewById(R.id.editTextFirstName);
+        lastNameTextView = (TextView) findViewById(R.id.textViewLastName);
+        lastNameEditText = (EditText) findViewById(R.id.editTextLastName);
         createButton = (Button) findViewById(R.id.createAccountButton);
         dbManager = MyDbManager.getInstance(this);
         try {
@@ -53,13 +63,9 @@ public class Create extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //if (!accountEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
-                //dbManager.getConnectedDAO().updatePswd(accountEditText.getText().toString(), passwordEditText.getText().toString());
-                //}
-                dbManager.getAccountDAO().addAccount("0642522876", "Christopher", "VALLOT");
-                dbManager.getAccountDAO().addAccount("0684529347", "Ben", "CRULIS");
-                dbManager.getAccountDAO().addAccount("0247508670");
-
+                if (!phoneNumberEditText.getText().toString().equals("") && !passwordEditText.getText().toString().equals("") && !firstNameEditText.getText().toString().equals("") && !lastNameEditText.getText().toString().equals("")) {
+                    NetFacade.createAccount(phoneNumberEditText.getText().toString(), firstNameEditText.getText().toString(), lastNameEditText.getText().toString(), passwordEditText.getText().toString());
+                }
                 finish();
             }
         });

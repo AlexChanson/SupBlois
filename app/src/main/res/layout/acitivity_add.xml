@@ -10,10 +10,10 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="140dp"
         android:text="@string/add_user"
-        android:textColor="@color/text_color"
         android:textAlignment="center"
+        android:textColor="@color/text_color"
         android:textSize="30dp"
         android:textStyle="bold" />
 
@@ -22,17 +22,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="249dp"
+        android:layout_marginTop="254dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="" />
+        android:inputType="phone"
+        android:singleLine="true"
+        android:text=""
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/phoneNumberTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="235dp"
         android:text="@string/phone_number"
         android:textAlignment="center"
         android:textColor="@color/text_color" />
@@ -41,7 +43,8 @@
         android:id="@+id/addUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@+id/phoneNumberTextView"
         android:layout_marginTop="340dp"
         android:text="@string/add_user" />
+
 </RelativeLayout>
