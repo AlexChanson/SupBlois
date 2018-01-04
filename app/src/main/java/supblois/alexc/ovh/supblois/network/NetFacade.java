@@ -1,5 +1,8 @@
 package supblois.alexc.ovh.supblois.network;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -76,5 +79,14 @@ public class NetFacade {
     public static Friend addFriend(String phone){
         Command cmd = new Command("FRIEND_ADD", new Object[]{phone}, Friend.class);
         return (Friend) Utility.getExpectedOrNull(cmd, 2);
+    }
+
+    public static boolean registerFbToken(Context context){
+        SharedPreferences prefs = context.getSharedPreferences("fb_token_storage", 0);
+        String token = prefs.getString("tok", null);
+
+        Command cmd = new Command("FB_TOKEN", new Object[]{token}, boolean.class);
+
+        return (boolean) Utility.getExpectedOrNull(cmd, 2);
     }
 }
