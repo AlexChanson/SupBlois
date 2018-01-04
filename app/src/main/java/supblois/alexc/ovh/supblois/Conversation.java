@@ -55,11 +55,14 @@ public class Conversation extends AppCompatActivity {
         init();
 
         sendButton.setOnClickListener(view -> {
-            if (messageEditText.getText().toString() != null) {
-                NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
-                messagesList.add(new Message(0,getMessageIntent.getStringExtra("id"),new Date(0),messageEditText.getText().toString()));
-                messageEditText.setText("");
-                myAdapterConversation.notifyDataSetChanged();
+            if (!messageEditText.getText().toString().equals("")) {
+                boolean result = NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
+                if (result){
+                    messagesList.add(new Message(0,getMessageIntent.getStringExtra("id"),new Date(0),messageEditText.getText().toString()));
+                    messageEditText.setText("");
+                    myAdapterConversation.notifyDataSetChanged();
+                    listViewConversation.setSelection(myAdapterConversation.getCount() - 1);
+                }
             }
         });
     }

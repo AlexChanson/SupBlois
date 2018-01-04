@@ -61,7 +61,6 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
         }
 
         RegAccount regAccount = getItem(i);
-        System.out.println("Drawing account : "+ regAccount.getNum() +" "+regAccount.getFirstName());
         View rowView = view;
         if (rowView == null){
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -119,19 +118,13 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
         textViewLastName.setOnClickListener(lmda);
 
         if (deleteButton != null) {
-            System.out.println("Addind button listener for "+regAccount.getNum()+" "+regAccount.getFirstName());
             deleteButton.setOnClickListener(view1 -> {
                 Boolean result = MyDbManager.getInstance(context).getAccountDAO().deleteByNumber(regAccount.getNum());
-                System.out.println("deleting "+regAccount.getNum()+ " : ");
-                System.out.println(result);
                 RegAccount deleted = regAccountsList.remove(i);
-                System.out.println("deleted :" + deleted.getNum()+ " "+deleted.getFirstName());
                 MyAdapterMessage.this.notifyDataSetChanged();
             });
         }
-        else {
-            System.out.println("strange, button is null...");
-        }
+
         return rowView;
     }
 

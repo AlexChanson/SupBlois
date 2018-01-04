@@ -29,6 +29,7 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/editTextMessage"
         android:layout_alignParentTop="true"
+        android:foregroundGravity="top"
         android:layout_centerHorizontal="true" />
 
     <Button

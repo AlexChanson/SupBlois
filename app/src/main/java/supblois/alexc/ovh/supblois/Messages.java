@@ -41,16 +41,12 @@ public class Messages extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onStart() {
+        super.onStart();
         setContentView(R.layout.activity_messages);
         init();
         listViewMessage = (ListView)findViewById(R.id.listViewMessage);
         List<RegAccount> regAccountsList = dbManager.getAccountDAO().getAll();
-        System.out.println("Registered contacts:");
-        for ( RegAccount ra: regAccountsList ){
-            System.out.println("    " + ra.getNum()+" "+ra.getFirstName());
-        }
         myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList, this);
         listViewMessage.setAdapter(myAdapterMessage);
 
