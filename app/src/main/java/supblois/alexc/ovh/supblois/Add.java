@@ -14,27 +14,23 @@ import org.w3c.dom.Text;
 import java.sql.SQLException;
 
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
+import supblois.alexc.ovh.supblois.network.Friend;
+import supblois.alexc.ovh.supblois.network.NetFacade;
 
 public class Add extends Activity {
     private TextView addUserTextView;
     private TextView phoneNumberTextView;
     private EditText phoneNumberEditText;
-    private EditText firstNameEditText;
-    private TextView firstNameTextView;
-    private EditText lastNameEditText;
-    private TextView lastNameTextView;
     private Button addUserButton;
     private MyDbManager dbManager;
+    private Friend friend;
 
     public void init() {
         addUserTextView = (TextView) findViewById(R.id.addUserTextView);
         phoneNumberTextView = (TextView) findViewById(R.id.phoneNumberTextView);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
         addUserButton = (Button) findViewById(R.id.addUserButton);
-        firstNameEditText = (EditText) findViewById(R.id.editTextFirstName);
-        firstNameTextView = (TextView) findViewById(R.id.textViewFirstName);
-        lastNameEditText = (EditText) findViewById(R.id.editTextLastName);
-        lastNameTextView = (TextView) findViewById(R.id.textViewLastName);
+
         dbManager = MyDbManager.getInstance(this);
         try {
             dbManager.open();
@@ -52,8 +48,11 @@ public class Add extends Activity {
         addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (phoneNumberEditText.getText().toString() != null && firstNameEditText.getText().toString() != null && lastNameEditText.getText().toString() != null) {
-                    dbManager.getAccountDAO().addAccount(phoneNumberEditText.getText().toString(), firstNameEditText.getText().toString(), lastNameEditText.getText().toString());
+                if (phoneNumberEditText.getText().toString() != null) {
+                    friend = NetFacade.addFriend(phoneNumberEditText.getText().toString());
+                    if (friend != null) {
+                        dbManager.getAccountDAO().addAccount(friend.phone, friend.prenom, friend.nom);
+                    }
                 }
             }
         });

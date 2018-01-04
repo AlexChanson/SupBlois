@@ -29,11 +29,11 @@
         android:textColor="@color/text_color" />
 
     <TextView
-        android:id="@+id/accountCreateTextView"
+        android:id="@+id/phoneNumberCreateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="99dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="99dp"
         android:text="@string/phone_number"
         android:textAlignment="center"
         android:textColor="@color/text_color" />
@@ -77,43 +77,43 @@
         android:layout_marginTop="410dp"/>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="198dp"
         android:ems="10"
-        android:textColor="@color/text_color"
         android:inputType="textPersonName"
-        android:text="" />
+        android:text=""
+        android:textColor="@color/text_color" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTextLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="279dp"
         android:layout_marginBottom="29dp"
+        android:layout_marginTop="279dp"
         android:ems="10"
-        android:textColor="@color/text_color"
         android:inputType="textPersonName"
-        android:text="" />
+        android:text=""
+        android:textColor="@color/text_color" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_color"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="180dp"
-        android:text="TextView" />
+        android:text="@string/first_name"
+        android:textColor="@color/text_color" />
 
     <TextView
-        android:id="@+id/textView2"
-        android:textColor="@color/text_color"
+        android:id="@+id/textViewLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="261dp"
-        android:text="TextView" />
+        android:text="@string/last_name"
+        android:textColor="@color/text_color" />
 </RelativeLayout>
