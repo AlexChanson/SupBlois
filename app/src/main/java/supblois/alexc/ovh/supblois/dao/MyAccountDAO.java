@@ -138,7 +138,7 @@ public class MyAccountDAO implements IAccountDAO {
 
     @Override
     public void setUnreadMsg(String number, int unread) {
-        String filter = MyDB.COLUMN_NUM+"="+number;
+        String filter = MyDB.COLUMN_NUM+"="+String.valueOf(Math.max(0, unread));
         ContentValues cv = new ContentValues();
         cv.put(MyDB.COLUMN_UNREAD, unread);
         database.update(MyDB.TABLE_ACCOUNT, cv, filter, null);
@@ -146,10 +146,9 @@ public class MyAccountDAO implements IAccountDAO {
 
     @Override
     public boolean deleteByNumber(String number) {
-        String strFilter = MyDB.COLUMN_NUM + "=" + number;
-        ContentValues args = new ContentValues();
-        args.put(MyDB.COLUMN_NUM, number);
-        if (database.delete(MyDB.TABLE_ACCOUNT, strFilter, null) < 1){
+        String strFilter = MyDB.COLUMN_NUM + "='" + number+"'";
+        int nDeleted = database.delete(MyDB.TABLE_ACCOUNT, strFilter, null);
+        if (nDeleted < 1){
             return false;
         }
         return true;

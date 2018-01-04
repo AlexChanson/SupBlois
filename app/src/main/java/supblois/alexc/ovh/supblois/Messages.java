@@ -47,22 +47,13 @@ public class Messages extends AppCompatActivity {
         init();
         listViewMessage = (ListView)findViewById(R.id.listViewMessage);
         List<RegAccount> regAccountsList = dbManager.getAccountDAO().getAll();
+        System.out.println("Registered contacts:");
+        for ( RegAccount ra: regAccountsList ){
+            System.out.println("    " + ra.getNum()+" "+ra.getFirstName());
+        }
         myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList, this);
         listViewMessage.setAdapter(myAdapterMessage);
-        listViewMessage.setOnItemClickListener((adapterView, view, i, l) -> {
-            Intent intent = new Intent(this, Conversation.class);
-            RegAccount reg = (RegAccount) adapterView.getItemAtPosition(i);
-            intent.putExtra("account", reg.getNum());
-            intent.putExtra("firstname", reg.getFirstName());
-            intent.putExtra("lastname", reg.getLastName());
-            Intent parentIntent = getIntent();
-            System.out.println("Going into conversation mode");
-            if (parentIntent != null){
-                intent.putExtra("id", parentIntent.getStringExtra("id"));
-                startActivity(intent);
-            }
 
-        });
         myAdapterMessage.notifyDataSetChanged();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {

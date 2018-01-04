@@ -5,10 +5,10 @@ package supblois.alexc.ovh.supblois.dao;
  */
 
 public class RegAccount {
-    public String num;
-    public String firstName; // si vide, utiliser num pour l'affichage
-    public String lastName;
-    public int unreadMsg;
+    private String num;
+    private String firstName; // si vide, utiliser num pour l'affichage
+    private String lastName;
+    private int unreadMsg;
 
     public RegAccount(String num, String firstName, String lastName, int unread) {
         this.num = num;

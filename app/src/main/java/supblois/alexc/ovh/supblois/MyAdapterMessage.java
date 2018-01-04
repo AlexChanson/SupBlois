@@ -56,8 +56,12 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        RegAccount regAccount = getItem(i);
+        if (getCount() <= 0){
+            return view;
+        }
 
+        RegAccount regAccount = getItem(i);
+        System.out.println("Drawing account : "+ regAccount.getNum() +" "+regAccount.getFirstName());
         View rowView = view;
         if (rowView == null){
             LayoutInflater layoutInflater = LayoutInflater.from(getContext());
@@ -76,7 +80,7 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
                 textViewFirstName.setText("NUMBER ERROR");
             }
         }
-        else if (regAccount.getFirstName() == null && regAccount.getLastName() == null) {
+        else if (regAccount.getFirstName().equals("") && regAccount.getLastName().equals("")) {
             if (textViewFirstName != null) {
                 textViewFirstName.setText(regAccount.getNum());
                 textViewLastName.setText("");
@@ -99,28 +103,34 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
                     textViewUnread.setText("");
                 }
             }
+        }
 
-            View.OnClickListener lmda = textViewLmbda ->{
-                Intent intent = new Intent(getContext(), Conversation.class);
-                intent.putExtra("account", regAccount.getNum());
-                intent.putExtra("firstname", regAccount.getFirstName());
-                intent.putExtra("lastname", regAccount.getLastName());
-                System.out.println("Going into conversation mode");
-                Intent parentIntent = parentActivity.getIntent();
-                intent.putExtra("id", parentIntent.getStringExtra("id"));
-                parentActivity.startActivity(intent);
-            };
-            textViewFirstName.setOnClickListener(lmda);
-            textViewLastName.setOnClickListener(lmda);
+        View.OnClickListener lmda = textViewLmbda ->{
+            Intent intent = new Intent(getContext(), Conversation.class);
+            intent.putExtra("account", regAccount.getNum());
+            intent.putExtra("firstname", regAccount.getFirstName());
+            intent.putExtra("lastname", regAccount.getLastName());
+            System.out.println("Going into conversation mode");
+            Intent parentIntent = parentActivity.getIntent();
+            intent.putExtra("id", parentIntent.getStringExtra("id"));
+            parentActivity.startActivity(intent);
+        };
+        textViewFirstName.setOnClickListener(lmda);
+        textViewLastName.setOnClickListener(lmda);
 
-            if (deleteButton != null) {
-                deleteButton.setOnClickListener(view1 -> {
-                    MyDbManager.getInstance(context).getAccountDAO().deleteByNumber(regAccount.getNum());
-                    regAccountsList.remove(i);
-                    MyAdapterMessage.this.notifyDataSetChanged();
-                });
-
-            }
+        if (deleteButton != null) {
+            System.out.println("Addind button listener for "+regAccount.getNum()+" "+regAccount.getFirstName());
+            deleteButton.setOnClickListener(view1 -> {
+                Boolean result = MyDbManager.getInstance(context).getAccountDAO().deleteByNumber(regAccount.getNum());
+                System.out.println("deleting "+regAccount.getNum()+ " : ");
+                System.out.println(result);
+                RegAccount deleted = regAccountsList.remove(i);
+                System.out.println("deleted :" + deleted.getNum()+ " "+deleted.getFirstName());
+                MyAdapterMessage.this.notifyDataSetChanged();
+            });
+        }
+        else {
+            System.out.println("strange, button is null...");
         }
         return rowView;
     }
