@@ -1,11 +1,6 @@
 package supblois.alexc.ovh.supblois.network;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +8,7 @@ import java.util.concurrent.TimeoutException;
 
 import supblois.alexc.ovh.supblois.Utility;
 import supblois.alexc.ovh.supblois.dao.Message;
+import supblois.alexc.ovh.supblois.dao.RegAccount;
 
 
 public class NetFacade {
@@ -72,9 +68,14 @@ public class NetFacade {
         String password = Utility.hashSHA256(pwd);
         Command cmd = new Command("CREATE", new Object[]{phone, prenom, nom, password}, boolean.class);
         try {
-            return (boolean) Utility.getExpectedOrNull(cmd, 4);
+            return (boolean) Utility.getExpectedOrNull(cmd, 2);
         }catch (NullPointerException e){
             return false;
         }
+    }
+
+    public static Friend addFriend(String phone){
+        Command cmd = new Command("FRIEND_ADD", new Object[]{phone}, Friend.class);
+        return (Friend) Utility.getExpectedOrNull(cmd, 2);
     }
 }
