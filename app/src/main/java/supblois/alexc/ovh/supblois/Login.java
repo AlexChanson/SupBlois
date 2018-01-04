@@ -1,6 +1,7 @@
 package supblois.alexc.ovh.supblois;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -58,6 +59,8 @@ public class Login extends AppCompatActivity {
                     startActivity(intentLogin);
                 }
                 else {
+                    accountNotExists.setText("*Wrong phone number or password");
+                    accountNotExists.setTextColor(Color.RED);
                     System.out.println("login failed!");
                 }
             }
