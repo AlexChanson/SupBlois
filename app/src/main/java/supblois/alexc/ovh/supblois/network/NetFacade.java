@@ -67,4 +67,8 @@ public class NetFacade {
             return false;
         }
     }
+
+    public static boolean createAccount(String phone, String prenom, String nom, String pwd){
+        return true;
+    }
 }
