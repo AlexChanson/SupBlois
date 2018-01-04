@@ -47,7 +47,7 @@ public class Messages extends AppCompatActivity {
         init();
         listViewMessage = (ListView)findViewById(R.id.listViewMessage);
         List<RegAccount> regAccountsList = dbManager.getAccountDAO().getAll();
-        myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList);
+        myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList, this);
         listViewMessage.setAdapter(myAdapterMessage);
         listViewMessage.setOnItemClickListener((adapterView, view, i, l) -> {
             Intent intent = new Intent(this, Conversation.class);
@@ -56,11 +56,11 @@ public class Messages extends AppCompatActivity {
             intent.putExtra("firstname", reg.getFirstName());
             intent.putExtra("lastname", reg.getLastName());
             Intent parentIntent = getIntent();
+            System.out.println("Going into conversation mode");
             if (parentIntent != null){
                 intent.putExtra("id", parentIntent.getStringExtra("id"));
                 startActivity(intent);
             }
-
 
         });
         myAdapterMessage.notifyDataSetChanged();

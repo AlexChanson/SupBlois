@@ -54,15 +54,12 @@ public class Conversation extends AppCompatActivity {
         setContentView(R.layout.activity_conversation);
         init();
 
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (messageEditText.getText().toString() != null) {
-                    NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
-                    NetFacade.pullMessages(true);
-                    messagesList.add(new Message(0,getMessageIntent.getStringExtra("id"),new Date(0),messageEditText.getText().toString()));
-                    messageEditText.setText("");
-                }
+        sendButton.setOnClickListener(view -> {
+            if (messageEditText.getText().toString() != null) {
+                NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
+                messagesList.add(new Message(0,getMessageIntent.getStringExtra("id"),new Date(0),messageEditText.getText().toString()));
+                messageEditText.setText("");
+                myAdapterConversation.notifyDataSetChanged();
             }
         });
     }
