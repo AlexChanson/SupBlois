@@ -69,6 +69,12 @@ public class NetFacade {
     }
 
     public static boolean createAccount(String phone, String prenom, String nom, String pwd){
-        return true;
+        String password = Utility.hashSHA256(pwd);
+        Command cmd = new Command("CREATE", new Object[]{phone, prenom, nom, password}, boolean.class);
+        try {
+            return (boolean) Utility.getExpectedOrNull(cmd, 4);
+        }catch (NullPointerException e){
+            return false;
+        }
     }
 }
