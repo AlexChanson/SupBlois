@@ -2,6 +2,7 @@ package supblois.alexc.ovh.supblois;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,7 @@ public class Add extends Activity {
     private TextView addUserTextView;
     private TextView phoneNumberTextView;
     private EditText phoneNumberEditText;
+    private TextView wrongNumberTextView;
     private Button addUserButton;
     private MyDbManager dbManager;
     private Friend friend;
@@ -30,6 +32,7 @@ public class Add extends Activity {
         phoneNumberTextView = (TextView) findViewById(R.id.phoneNumberTextView);
         phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
         addUserButton = (Button) findViewById(R.id.addUserButton);
+        wrongNumberTextView = (TextView) findViewById(R.id.textViewWrongNumber);
 
         dbManager = MyDbManager.getInstance(this);
         try {
@@ -52,6 +55,11 @@ public class Add extends Activity {
                     friend = NetFacade.addFriend(phoneNumberEditText.getText().toString());
                     if (friend != null) {
                         dbManager.getAccountDAO().addAccount(friend.phone, friend.prenom, friend.nom);
+                        finish();
+                    }
+                    else {
+                        wrongNumberTextView.setText("*Wrong phone number");
+                        wrongNumberTextView.setTextColor(Color.RED);
                     }
                 }
             }

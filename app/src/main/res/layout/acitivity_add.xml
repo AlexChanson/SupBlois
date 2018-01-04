@@ -27,7 +27,7 @@
         android:inputType="phone"
         android:singleLine="true"
         android:text=""
-        android:textColor="@android:color/white" />
+        android:textColor="@color/text_color"/>
 
     <TextView
         android:id="@+id/phoneNumberTextView"
@@ -44,7 +44,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/phoneNumberTextView"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="338dp"
         android:text="@string/add_user" />
+
+    <TextView
+        android:id="@+id/textViewWrongNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_alignStart="@id/phoneNumberEditText" />
 
 </RelativeLayout>

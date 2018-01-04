@@ -1,5 +1,6 @@
 package supblois.alexc.ovh.supblois;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -64,9 +65,14 @@ public class Create extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!phoneNumberEditText.getText().toString().equals("") && !passwordEditText.getText().toString().equals("") && !firstNameEditText.getText().toString().equals("") && !lastNameEditText.getText().toString().equals("")) {
-                    NetFacade.createAccount(phoneNumberEditText.getText().toString(), firstNameEditText.getText().toString(), lastNameEditText.getText().toString(), passwordEditText.getText().toString());
+                    if(NetFacade.createAccount(phoneNumberEditText.getText().toString(), firstNameEditText.getText().toString(), lastNameEditText.getText().toString(), passwordEditText.getText().toString())) {
+                        finish();
+                    }
+                    else {
+                        accountAlreadyExists.setText("*Account already exists");
+                        accountAlreadyExists.setTextColor(Color.RED);
+                    }
                 }
-                finish();
             }
         });
     }
