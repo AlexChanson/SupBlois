@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.sql.SQLException;
 import java.time.Instant;
@@ -25,6 +26,8 @@ public class Conversation extends AppCompatActivity {
     private Intent getMessageIntent;
     private MyAdapterConversation myAdapterConversation;
     private List<Message> messagesList;
+    private TextView convFirstNameView;
+    private TextView convLastNameView;
 
     public void init() {
         messageEditText = (EditText) findViewById(R.id.editTextMessage);
@@ -33,6 +36,9 @@ public class Conversation extends AppCompatActivity {
         dbManager = MyDbManager.getInstance(this);
         getMessageIntent = getIntent();
         messagesList = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
+        convFirstNameView = findViewById(R.id.convFirstNameTextView);
+        convLastNameView = findViewById(R.id.convLastNameTextView);
+
 
         String id = null;
         if (getMessageIntent != null){
@@ -53,6 +59,18 @@ public class Conversation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
         init();
+
+
+        String firstname = getMessageIntent.getStringExtra("firstname");
+        String lastname = getMessageIntent.getStringExtra("lastname");
+
+        if (firstname.equals("") && lastname.equals("")){
+            convFirstNameView.setText(getMessageIntent.getStringExtra("account"));
+        }
+        else{
+            convFirstNameView.setText(firstname);
+            convLastNameView.setText(lastname);
+        }
 
         sendButton.setOnClickListener(view -> {
             if (!messageEditText.getText().toString().equals("")) {
