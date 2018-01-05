@@ -26,9 +26,9 @@ public class MyMessageDAO implements IMessageDAO {
 
     @Override
     public ArrayList<Message> getMsgFrom(String sender) {
-        String filter = MyDB.COLUMN_SENDER+"="+sender;
+        String filter = MyDB.COLUMN_SENDER+"=?";
         ArrayList<Message> res = new ArrayList<>();
-        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, filter, null, null, null, null );
+        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, filter, new String[] {sender}, null, null, null );
         while (cur.moveToNext()){
             Message msg = convertToMsg(cur);
             res.add(msg);
@@ -86,12 +86,12 @@ public class MyMessageDAO implements IMessageDAO {
 
     @Override
     public void deleteAllMsgFrom(String sender) {
-        database.delete(MyDB.TABLE_MSG, MyDB.COLUMN_SENDER+"="+sender, null);
+        database.delete(MyDB.TABLE_MSG, MyDB.COLUMN_SENDER+"=?", new String[] {sender});
     }
 
     @Override
     public void keepOnlyLastMsg(String sender, long numberToKeep) {
-        String filter = MyDB.COLUMN_SENDER+"="+sender;
+        String filter = MyDB.COLUMN_SENDER+"='"+sender+"'";
         String query = "DELETE * from "+MyDB.TABLE_MSG+" WHERE "+filter+" ORDER BY "+MyDB.COLUMN_DATE+" DESC LIMIT "+numberToKeep;
         database.rawQuery(query, null);
 

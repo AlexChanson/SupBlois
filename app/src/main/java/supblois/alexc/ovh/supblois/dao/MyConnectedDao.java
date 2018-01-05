@@ -21,14 +21,14 @@ public class MyConnectedDao implements IConnectedDAO {
 
     @Override
     public String getPasswd(String num) {
-        String filter = MyDB.COLUMN_LOGGED_NUM+"="+num;
+        String filter = MyDB.COLUMN_LOGGED_NUM+"=?";
         Cursor cur = database.query(
                 MyDB.TABLE_CONNECTED, MyDB.ALLCOLUMNS_CONNECTED, filter,
-                null, null, null, null
+                new String[] {num}, null, null, null
         );
         if (cur.moveToNext()){
 
-            return cur.getString(2);
+            return cur.getString(1);
         }
 
         return null;
@@ -56,6 +56,6 @@ public class MyConnectedDao implements IConnectedDAO {
 
     @Override
     public void forget(String num) {
-        database.delete(MyDB.TABLE_CONNECTED, MyDB.COLUMN_LOGGED_NUM+"="+num, null);
+        database.delete(MyDB.TABLE_CONNECTED, MyDB.COLUMN_LOGGED_NUM+"=?", new String[] {num} );
     }
 }

@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.network.NetFacade;
 
 public class Login extends AppCompatActivity {
@@ -57,6 +58,7 @@ public class Login extends AppCompatActivity {
                     System.out.println("logged successfully!");
                     intentLogin = new Intent (Login.this, Messages.class);
                     intentLogin.putExtra("id", nb);
+                    MyDbManager.getInstance(getBaseContext()).getConnectedDAO().updatePswd(nb, pwd);
                     startActivity(intentLogin);
                 }
                 else {

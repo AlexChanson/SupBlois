@@ -69,8 +69,8 @@ public class MyAccountDAO implements IAccountDAO {
 
     @Override
     public ArrayList<RegAccount> getByFirstName(String firstName) {
-        String filter = MyDB.COLUMN_FIRSTNAME+"="+firstName;
-        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, filter, null, null, null, null );
+        String filter = MyDB.COLUMN_FIRSTNAME+"=?";
+        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, filter, new String[] {firstName}, null, null, null );
 
         ArrayList<RegAccount> ret = new ArrayList<>();
 
@@ -78,7 +78,7 @@ public class MyAccountDAO implements IAccountDAO {
 
             ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3)));
         }
-
+        cursor.close();
         return ret;
 
     }
@@ -107,47 +107,47 @@ public class MyAccountDAO implements IAccountDAO {
         while (cursor.moveToNext()){
             ret.add(new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3)));
         }
-
+        cursor.close();
         return ret;
     }
 
     @Override
     public void setFirstName(String number, String newFirstName) {
-        String filter = MyDB.COLUMN_NUM+"="+number;
+        String filter = MyDB.COLUMN_NUM+"=?";
         ContentValues contentValues = new ContentValues();
         contentValues.put(MyDB.COLUMN_FIRSTNAME, newFirstName);
-        database.update(MyDB.TABLE_ACCOUNT, contentValues, filter, null);
+        database.update(MyDB.TABLE_ACCOUNT, contentValues, filter, new String[] {number});
     }
 
     @Override
     public void setLastName(String number, String newLastName) {
-        String filter = MyDB.COLUMN_NUM+"="+number;
+        String filter = MyDB.COLUMN_NUM+"=?";
         ContentValues contentValues = new ContentValues();
         contentValues.put(MyDB.COLUMN_FIRSTNAME, newLastName);
-        database.update(MyDB.TABLE_ACCOUNT, contentValues, filter, null);
+        database.update(MyDB.TABLE_ACCOUNT, contentValues, filter, new String[] {number});
     }
 
     @Override
     public void setFirstAndLastName(String number, String newFirstName, String newLastName) {
-        String filter = MyDB.COLUMN_NUM+"="+number;
+        String filter = MyDB.COLUMN_NUM+"=?";
         ContentValues contentValues = new ContentValues();
         contentValues.put(MyDB.COLUMN_FIRSTNAME, newFirstName);
         contentValues.put(MyDB.COLUMN_LASTNAME, newLastName);
-        database.update(MyDB.TABLE_ACCOUNT, contentValues, filter, null);
+        database.update(MyDB.TABLE_ACCOUNT, contentValues, filter, new String[] {number});
     }
 
     @Override
     public void setUnreadMsg(String number, int unread) {
-        String filter = MyDB.COLUMN_NUM+"="+String.valueOf(Math.max(0, unread));
+        String filter = MyDB.COLUMN_NUM+"=?";
         ContentValues cv = new ContentValues();
-        cv.put(MyDB.COLUMN_UNREAD, unread);
-        database.update(MyDB.TABLE_ACCOUNT, cv, filter, null);
+        cv.put(MyDB.COLUMN_UNREAD, Math.max(0, unread));
+        database.update(MyDB.TABLE_ACCOUNT, cv, filter, new String[] {number});
     }
 
     @Override
     public boolean deleteByNumber(String number) {
-        String strFilter = MyDB.COLUMN_NUM + "='" + number+"'";
-        int nDeleted = database.delete(MyDB.TABLE_ACCOUNT, strFilter, null);
+        String strFilter = MyDB.COLUMN_NUM + "=?";
+        int nDeleted = database.delete(MyDB.TABLE_ACCOUNT, strFilter, new String[] {number});
         if (nDeleted < 1){
             return false;
         }
