@@ -69,6 +69,10 @@ public class Conversation extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.buttonReceive).setOnClickListener(v -> {
+            //TODO forcer rafraichir la conv
+        });
+
     }
 
     @Override
