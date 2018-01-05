@@ -77,6 +77,8 @@ public class Conversation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("onCreate CALLED");
+
         setContentView(R.layout.activity_conversation);
         init();
 
@@ -110,15 +112,19 @@ public class Conversation extends AppCompatActivity {
                 }
             }
         });
+
+        findViewById(R.id.buttonReceive).setOnClickListener(v -> {
+            //TODO forcer rafraichir la conv
+        });
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        //TODO update view
-        if (Objects.equals(intent.getAction(), "SHOW_MESSAGE")){
 
-        }
+            System.out.println("onNewIntent CALLED");
+
     }
 }
