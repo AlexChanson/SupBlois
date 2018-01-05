@@ -77,7 +77,6 @@ public class MyMessageDAO implements IMessageDAO {
     public void newMsg(long msgid, String sender, long date, String content) {
         ContentValues cv = new ContentValues();
 
-        cv.put(MyDB.COLUMN_MSG_ID, msgid);
         cv.put(MyDB.COLUMN_SENDER, sender);
         cv.put(MyDB.COLUMN_DATE, date);
         cv.put(MyDB.COLUMN_CONTENT, content);

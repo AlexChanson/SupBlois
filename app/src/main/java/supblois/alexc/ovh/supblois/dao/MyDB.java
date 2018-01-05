@@ -65,7 +65,7 @@ public class MyDB extends SQLiteOpenHelper {
             +
             "("
             +
-            COLUMN_MSG_ID + " integer" + NOTNULL + ", "
+            COLUMN_MSG_ID + " integer PRIMARY KEY AUTOINCREMENT" + NOTNULL + ", "
             +
             COLUMN_SENDER + " Text" + NOTNULL + ", "
             +
@@ -73,7 +73,7 @@ public class MyDB extends SQLiteOpenHelper {
             +
             COLUMN_CONTENT + " Text" + NOTNULL + ", "
             +
-            " PRIMARY KEY("+COLUMN_MSG_ID+","+COLUMN_SENDER+") "
+            " UNIQUE ("+COLUMN_MSG_ID+","+COLUMN_SENDER+") "
             +
             ");";
 
