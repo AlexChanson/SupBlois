@@ -1,9 +1,11 @@
 package supblois.alexc.ovh.supblois;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -38,7 +40,10 @@ public class MsgNotificationManager {
                 new NotificationCompat.Builder(mCtx, "messages")
                         .setSmallIcon(R.drawable.notif_icon)
                         .setContentTitle(title)
-                        .setContentText(body);
+                        .setContentText(body)
+                        .setLights(Color.CYAN, 500, 250)
+                        .setVibrate(new long[]{500, 1000})
+                        .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
 
         Intent resultIntent = new Intent(mCtx, Conversation.class);
@@ -55,12 +60,6 @@ public class MsgNotificationManager {
         if (mNotifyMgr != null) {
             mNotifyMgr.notify(1, mBuilder.build());
         }
-
-        try {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            Ringtone r = RingtoneManager.getRingtone(mCtx, notification);
-            r.play();
-        }catch (Exception ignored){}
     }
 
 }
