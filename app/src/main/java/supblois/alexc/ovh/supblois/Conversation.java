@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
@@ -65,5 +66,15 @@ public class Conversation extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        //TODO update view
+        if (Objects.equals(intent.getAction(), "SHOW_MESSAGE")){
+
+        }
     }
 }
