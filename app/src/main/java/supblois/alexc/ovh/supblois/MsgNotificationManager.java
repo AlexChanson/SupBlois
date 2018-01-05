@@ -38,7 +38,7 @@ public class MsgNotificationManager {
                         .setContentText(body);
 
 
-        Intent resultIntent = new Intent(mCtx, Login.class);
+        Intent resultIntent = new Intent(mCtx, Conversation.class);
         resultIntent.setAction("SHOW_MESSAGE");
         resultIntent.putExtra("PHONE_NB", title);
 
