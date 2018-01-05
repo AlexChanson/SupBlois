@@ -2,16 +2,19 @@ package supblois.alexc.ovh.supblois.network;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-/**
- * Created by alex on 1/4/18.
- */
+import java.util.Map;
 
 public class FirebaseMsgService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        System.out.println("Firebase message received !");
+
+        Map<String, String> data = remoteMessage.getData();
+        String sendBy = data.get("sender");
+        String message = data.get("content");
+
+        //DEBUG
+        System.out.printf("Firebase Message Recu de %s msg='%s'%n", sendBy, message);
     }
 
 }
