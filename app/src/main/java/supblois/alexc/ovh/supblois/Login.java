@@ -13,7 +13,10 @@ import android.widget.TextView;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
+import supblois.alexc.ovh.supblois.dao.ConnectedAccount;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.network.NetFacade;
 
@@ -28,6 +31,7 @@ public class Login extends AppCompatActivity {
     private Button createAccountButton;
     private Intent intentCreate;
     private Intent intentLogin;
+    private MyDbManager myDbManager;
 
     public void init() {
         loginImageView = findViewById(R.id.loginImageView);
@@ -38,6 +42,12 @@ public class Login extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordLoginEditText);
         loginButton = findViewById(R.id.loginButton);
         createAccountButton = findViewById(R.id.createAccountLoginButton);
+        myDbManager = MyDbManager.getInstance(getBaseContext());
+        try {
+            myDbManager.open();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -45,6 +55,17 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
+
+
+        ArrayList<ConnectedAccount> connectedAccounts = myDbManager.getConnectedDAO()
+                                                                    .getAllConnected();
+
+        if (!connectedAccounts.isEmpty()){
+            ConnectedAccount acc = connectedAccounts.get(0);
+            System.out.println("Logged account found: "+acc.getNum());
+            accountEditText.setText(acc.getNum(), TextView.BufferType.EDITABLE);
+            passwordEditText.setText(acc.getPasswd(), TextView.BufferType.EDITABLE);
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +79,7 @@ public class Login extends AppCompatActivity {
                     System.out.println("logged successfully!");
                     intentLogin = new Intent (Login.this, Messages.class);
                     intentLogin.putExtra("id", nb);
-                    MyDbManager.getInstance(getBaseContext()).getConnectedDAO().updatePswd(nb, pwd);
+                    myDbManager.getConnectedDAO().updatePswd(nb, pwd);
                     startActivity(intentLogin);
                 }
                 else {

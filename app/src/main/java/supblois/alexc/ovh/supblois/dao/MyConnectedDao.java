@@ -30,7 +30,7 @@ public class MyConnectedDao implements IConnectedDAO {
 
             return cur.getString(1);
         }
-
+        cur.close();
         return null;
     }
 
@@ -39,7 +39,10 @@ public class MyConnectedDao implements IConnectedDAO {
         ContentValues cv = new ContentValues();
         cv.put(MyDB.COLUMN_LOGGED_NUM, num);
         cv.put(MyDB.COLUMN_LOGGED_PSWD, passwd);
-        database.updateWithOnConflict( MyDB.TABLE_CONNECTED, cv, null , null, SQLiteDatabase.CONFLICT_REPLACE);
+        int res = (int) database.insertWithOnConflict( MyDB.TABLE_CONNECTED, null, cv, SQLiteDatabase.CONFLICT_IGNORE);
+        if (res == -1) {
+            database.update(MyDB.TABLE_CONNECTED, cv, null, null);
+        }
     }
 
     @Override
@@ -50,7 +53,7 @@ public class MyConnectedDao implements IConnectedDAO {
         while (cur.moveToNext()){
             ret.add(new ConnectedAccount(cur.getString(0), cur.getString(1)));
         }
-
+        cur.close();
         return ret;
     }
 
