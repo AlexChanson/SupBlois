@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.sql.SQLException;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -26,27 +29,49 @@ public class Conversation extends AppCompatActivity {
     private Intent getMessageIntent;
     private MyAdapterConversation myAdapterConversation;
     private List<Message> messagesList;
+    private TextView convFirstNameView;
+    private TextView convLastNameView;
+
+    public void scrollToBottom(){
+        listViewConversation.setSelection(myAdapterConversation.getCount() - 1);
+    }
 
     public void init() {
-        messageEditText = findViewById(R.id.editTextMessage);
-        sendButton = findViewById(R.id.buttonSend);
-        listViewConversation = findViewById(R.id.listViewConversation);
         dbManager = MyDbManager.getInstance(this);
-        getMessageIntent = getIntent();
-        messagesList = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
-
-        String id = null;
-        if (getMessageIntent != null){
-            id = getMessageIntent.getStringExtra("id");
-            System.out.println(id);
-        }
-        myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
-        listViewConversation.setAdapter(myAdapterConversation);
         try {
             dbManager.open();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        messageEditText = (EditText) findViewById(R.id.editTextMessage);
+        sendButton = (Button) findViewById(R.id.buttonSend);
+        listViewConversation = (ListView) findViewById(R.id.listViewConversation);
+        getMessageIntent = getIntent();
+        messagesList = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
+        convFirstNameView = findViewById(R.id.convFirstNameTextView);
+        convLastNameView = findViewById(R.id.convLastNameTextView);
+
+        String id = null;
+        if (getMessageIntent != null){
+            id = getMessageIntent.getStringExtra("id");
+        }
+
+        myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
+        listViewConversation.setAdapter(myAdapterConversation);
+        scrollToBottom();
+
+        ArrayList<Message> allMsg = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
+        for (Message msg: allMsg){
+            messagesList.add(msg);
+        }
+
+        myAdapterConversation.notifyDataSetChanged();
+
+        messageEditText.setOnClickListener((View v) -> scrollToBottom());
+        messageEditText.setOnFocusChangeListener((View v, boolean hasFocus) -> {
+            if (hasFocus) scrollToBottom();
+        });
     }
 
     @Override
@@ -57,14 +82,33 @@ public class Conversation extends AppCompatActivity {
         setContentView(R.layout.activity_conversation);
         init();
 
+
+        String firstname = getMessageIntent.getStringExtra("firstname");
+        String lastname = getMessageIntent.getStringExtra("lastname");
+
+        if (firstname.equals("") && lastname.equals("")){
+            convFirstNameView.setText(getMessageIntent.getStringExtra("account"));
+        }
+        else{
+            convFirstNameView.setText(firstname);
+            convLastNameView.setText(lastname);
+        }
+
         sendButton.setOnClickListener(view -> {
             if (!messageEditText.getText().toString().equals("")) {
                 boolean result = NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
                 if (result){
-                    messagesList.add(new Message(0,getMessageIntent.getStringExtra("id"),new Date(0),messageEditText.getText().toString()));
+                    Message msg = new Message(0,
+                            getMessageIntent.getStringExtra("id"),
+                            Calendar.getInstance().getTime(),
+                            messageEditText.getText().toString());
+                    messagesList.add(msg);
                     messageEditText.setText("");
+
+                    dbManager.getMessageDAO().newMsg(msg);
+
                     myAdapterConversation.notifyDataSetChanged();
-                    listViewConversation.setSelection(myAdapterConversation.getCount() - 1);
+                    scrollToBottom();
                 }
             }
         });
