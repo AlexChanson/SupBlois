@@ -4,6 +4,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
@@ -52,6 +55,12 @@ public class MsgNotificationManager {
         if (mNotifyMgr != null) {
             mNotifyMgr.notify(1, mBuilder.build());
         }
+
+        try {
+            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(mCtx, notification);
+            r.play();
+        }catch (Exception ignored){}
     }
 
 }

@@ -28,9 +28,9 @@ public class Conversation extends AppCompatActivity {
     private List<Message> messagesList;
 
     public void init() {
-        messageEditText = (EditText) findViewById(R.id.editTextMessage);
-        sendButton = (Button) findViewById(R.id.buttonSend);
-        listViewConversation = (ListView) findViewById(R.id.listViewConversation);
+        messageEditText = findViewById(R.id.editTextMessage);
+        sendButton = findViewById(R.id.buttonSend);
+        listViewConversation = findViewById(R.id.listViewConversation);
         dbManager = MyDbManager.getInstance(this);
         getMessageIntent = getIntent();
         messagesList = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
@@ -52,6 +52,8 @@ public class Conversation extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("onCreate CALLED");
+
         setContentView(R.layout.activity_conversation);
         init();
 
@@ -66,15 +68,15 @@ public class Conversation extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
 
-        //TODO update view
-        if (Objects.equals(intent.getAction(), "SHOW_MESSAGE")){
 
-        }
+            System.out.println("onNewIntent CALLED");
+
     }
 }
