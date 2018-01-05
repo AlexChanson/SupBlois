@@ -4,6 +4,8 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import java.util.Map;
 
+import supblois.alexc.ovh.supblois.MsgNotificationManager;
+
 public class FirebaseMsgService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -15,6 +17,9 @@ public class FirebaseMsgService extends FirebaseMessagingService {
 
         //DEBUG
         System.out.printf("Firebase Message Recu de %s msg='%s'%n", sendBy, message);
+
+        MsgNotificationManager.getInstance(getApplicationContext()).displayNotification(sendBy, message);
+
     }
 
 }

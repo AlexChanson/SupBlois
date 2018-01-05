@@ -23,7 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Conversation"
-                    android:windowSoftInputMode="adjustResize"/>
+                    android:windowSoftInputMode="adjustResize"
+                    android:launchMode="singleTop">
+
+        </activity>
         <activity android:name=".Create" />
         <activity android:name=".Add" />
         <activity android:name=".Messages" />
