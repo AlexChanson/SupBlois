@@ -60,7 +60,6 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
             textViewMe = (TextView) rowView.findViewById(R.id.textViewMe);
             textViewOther = (TextView) rowView.findViewById(R.id.textViewOther);
         }
-        System.out.println(message.getSenderId());
         if (message.isSent()) {
 
             if (textViewMe != null) {
