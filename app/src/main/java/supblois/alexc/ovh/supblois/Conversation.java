@@ -107,7 +107,7 @@ public class Conversation extends AppCompatActivity {
 
         findViewById(R.id.buttonReceive).setOnClickListener(v -> {
             messagesList.clear();
-            Utility.updateMessages(dbManager.getMessageDAO(), number, false);
+            Utility.updateMessages(dbManager.getMessageDAO(), number, true);
             messagesList.addAll(dbManager.getMessageDAO().getMsgFrom(number));
             myAdapterConversation.notifyDataSetChanged();
         });
@@ -124,10 +124,8 @@ public class Conversation extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-
-
-            System.out.println("onNewIntent CALLED");
-
+        Utility.updateMessages(dbManager.getMessageDAO(), number, false);
+        init();
     }
 
 }
