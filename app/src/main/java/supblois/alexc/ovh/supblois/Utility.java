@@ -3,6 +3,7 @@ package supblois.alexc.ovh.supblois;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -76,10 +77,8 @@ public class Utility {
     public static void updateMessages(IMessageDAO messageDAO, String target, boolean doAll){
         if (doAll)
             messageDAO.deleteAllMsgFrom(target);
-        List<Message> toInsert = NetFacade.pullMessages(doAll, target);
-        if (toInsert != null){
-            for (Message message : toInsert)
-                messageDAO.newMsg(message);
-        }
+        List<Message> toInsert = new ArrayList<>(NetFacade.pullMessages(doAll, target));
+        for (Message message : toInsert)
+            messageDAO.newMsg(message);
     }
 }

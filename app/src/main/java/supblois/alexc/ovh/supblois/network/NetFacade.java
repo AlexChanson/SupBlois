@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -36,10 +37,9 @@ public class NetFacade {
     }
 
     public static List<Message> pullMessages(boolean pullAll){
-        List<Message> messageList = new ArrayList<Message>();
-        Command cmd = new Command("PULL", new Object[]{pullAll}, messageList.getClass());
+        Command cmd = new Command("PULL", new Object[]{pullAll}, Message[].class);
         try {
-            return  (List<Message>) Utility.getExpectedOrNull(cmd, 5);
+            return Arrays.asList((Message[]) Utility.getExpectedOrNull(cmd, 5));
         }catch (ClassCastException e){
             System.err.println("Error retrieving messages !");
             return null;
@@ -47,10 +47,9 @@ public class NetFacade {
     }
 
     public static List<Message> pullMessages(boolean pullAll, String filter){
-        List<Message> messageList = new ArrayList<Message>();
-        Command cmd = new Command("PULL", new Object[]{pullAll, filter}, messageList.getClass());
+        Command cmd = new Command("PULL", new Object[]{pullAll, filter}, Message[].class);
         try {
-            return  (List<Message>) Utility.getExpectedOrNull(cmd, 5);
+            return Arrays.asList((Message[]) Utility.getExpectedOrNull(cmd, 5));
         }catch (ClassCastException e){
             System.err.println("Error retrieving messages !");
             return null;
