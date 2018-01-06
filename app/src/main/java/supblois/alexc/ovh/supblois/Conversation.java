@@ -48,7 +48,7 @@ public class Conversation extends AppCompatActivity {
         messageEditText = findViewById(R.id.editTextMessage);
         listViewConversation = findViewById(R.id.listViewConversation);
 
-        //listViewConversation.setOnScrollChangeListener(this);
+
 
 
         String firstname = intent.getStringExtra("firstname");
@@ -58,8 +58,26 @@ public class Conversation extends AppCompatActivity {
 
         myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
         listViewConversation.setAdapter(myAdapterConversation);
-        scrollToBottom();
 
+        listViewConversation.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE
+                        && (listViewConversation.getLastVisiblePosition() - listViewConversation.getHeaderViewsCount() -
+                        listViewConversation.getFooterViewsCount()) >= (myAdapterConversation.getCount() - 1)) {
+
+                    dbManager.getAccountDAO().setUnreadMsg(number, 0);
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+
+        scrollToBottom();
 
         messageEditText.setOnClickListener((View v) -> scrollToBottom());
         messageEditText.setOnFocusChangeListener((View v, boolean hasFocus) -> {
