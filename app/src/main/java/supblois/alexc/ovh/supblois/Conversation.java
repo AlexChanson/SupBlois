@@ -34,6 +34,7 @@ public class Conversation extends AppCompatActivity {
 
     public void init() {
         setContentView(R.layout.activity_conversation);
+        intent = getIntent();
         dbManager = MyDbManager.getInstance(this);
         try {
             dbManager.open();
@@ -41,11 +42,12 @@ public class Conversation extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        number = intent.getStringExtra("account");
         messagesList = dbManager.getMessageDAO().getMsgFrom(number);
         messageEditText = findViewById(R.id.editTextMessage);
         listViewConversation = findViewById(R.id.listViewConversation);
-        intent = getIntent();
-        number = intent.getStringExtra("account");
+
+
         String firstname = intent.getStringExtra("firstname");
         String lastname = intent.getStringExtra("lastname");
 
