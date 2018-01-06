@@ -10,25 +10,33 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textViewOther"
         android:layout_alignBottom="@+id/textViewOther"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="15dp"
+        android:maxWidth="150dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="39dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/bubble_me"
         android:gravity="center"
         android:text="@string/me"
         android:textAlignment="center"
         android:textColor="@color/text_color"
-        android:textSize="25dp" />
+        android:textSize="15dp" />
 
     <TextView
         android:id="@+id/textViewOther"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="11dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="200dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="15dp"
+        android:maxWidth="150dp"
         android:background="@drawable/bubble_other"
         android:gravity="center"
         android:text="@string/other"
         android:textAlignment="center"
         android:textColor="@color/text_color"
-        android:textSize="25dp" />
+        android:textSize="15dp" />
 </RelativeLayout>
