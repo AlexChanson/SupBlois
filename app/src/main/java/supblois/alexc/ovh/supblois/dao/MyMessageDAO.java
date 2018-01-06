@@ -28,7 +28,7 @@ public class MyMessageDAO implements IMessageDAO {
     public ArrayList<Message> getMsgFrom(String sender) {
         String filter = MyDB.COLUMN_SENDER+"=?";
         ArrayList<Message> res = new ArrayList<>();
-        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, filter, new String[] {sender}, null, null, null );
+        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, filter, new String[] {sender}, null, null, MyDB.COLUMN_DATE+" ASC" );
         while (cur.moveToNext()){
             Message msg = convertToMsg(cur);
             res.add(msg);
@@ -60,7 +60,7 @@ public class MyMessageDAO implements IMessageDAO {
     @Override
     public ArrayList<Message> getAll() {
         ArrayList<Message> res = new ArrayList<>();
-        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, null, null, null, null, null );
+        Cursor cur = database.query(MyDB.TABLE_MSG, MyDB.ALLCOLUMNS_MSG, null, null, null, null, MyDB.COLUMN_DATE+" ASC" );
         while (cur.moveToNext()){
             Message msg = convertToMsg(cur);
             res.add(msg);

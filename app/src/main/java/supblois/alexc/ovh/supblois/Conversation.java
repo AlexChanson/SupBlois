@@ -110,6 +110,7 @@ public class Conversation extends AppCompatActivity {
             Utility.updateMessages(dbManager.getMessageDAO(), number, true);
             messagesList.addAll(dbManager.getMessageDAO().getMsgFrom(number));
             myAdapterConversation.notifyDataSetChanged();
+            scrollToBottom();
         });
 
         myAdapterConversation.notifyDataSetChanged();

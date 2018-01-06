@@ -1,6 +1,11 @@
 package supblois.alexc.ovh.supblois;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +68,7 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
         if (message.isSent()) {
             if (textViewMe != null) {
                 textViewMe.setText(message.getContent());
+                textViewMe.setBackground(ResourcesCompat.getDrawable(rowView.getResources(), R.drawable.bubble_me, null));
                 textViewOther.setText("");
                 textViewOther.setBackground(null);
             }
@@ -70,6 +76,7 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
         else {
             if (textViewMe != null) {
                 textViewOther.setText(message.getContent());
+                textViewOther.setBackground(ResourcesCompat.getDrawable(rowView.getResources(), R.drawable.bubble_other, null));
                 textViewMe.setText("");
                 textViewMe.setBackground(null);
             }

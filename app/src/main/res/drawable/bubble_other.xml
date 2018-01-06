@@ -3,7 +3,7 @@
     <solid android:color="#03224C"/>
 
     <stroke android:width="3dp"
-        android:color="#03224C"
+        android:color="@color/bubble_other"
         />
 
     <padding android:left="10dp"
