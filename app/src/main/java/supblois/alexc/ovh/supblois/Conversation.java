@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import supblois.alexc.ovh.supblois.dao.Message;
@@ -87,7 +88,7 @@ public class Conversation extends AppCompatActivity {
                 if (result){
                     Date time = Calendar.getInstance().getTime();
                     Message msg = new Message(0,
-                            getMessageIntent.getStringExtra("account"),
+                            intent.getStringExtra("account"),
                             time,
                             true,
                             messageEditText.getText().toString());
