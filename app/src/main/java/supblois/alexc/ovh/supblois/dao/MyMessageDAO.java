@@ -97,4 +97,9 @@ public class MyMessageDAO implements IMessageDAO {
         database.rawQuery(query, null);
 
     }
+
+    @Override
+    public void deleteAll(){
+        database.delete(MyDB.TABLE_MSG, null, null);
+    }
 }

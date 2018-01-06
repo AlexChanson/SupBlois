@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -47,7 +48,7 @@ public class Conversation extends AppCompatActivity {
         messageEditText = findViewById(R.id.editTextMessage);
         listViewConversation = findViewById(R.id.listViewConversation);
 
-
+        //listViewConversation.setOnScrollChangeListener(this);
 
 
         String firstname = intent.getStringExtra("firstname");
@@ -109,4 +110,5 @@ public class Conversation extends AppCompatActivity {
             System.out.println("onNewIntent CALLED");
 
     }
+
 }
