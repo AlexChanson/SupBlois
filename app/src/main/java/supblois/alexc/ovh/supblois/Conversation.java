@@ -47,7 +47,6 @@ public class Conversation extends AppCompatActivity {
         number = intent.getStringExtra("account");
         String firstname = intent.getStringExtra("firstname");
         String lastname = intent.getStringExtra("lastname");
-        messagesList = dbManager.getMessageDAO().getMsgFrom(number);
 
         String id = intent != null ? intent.getStringExtra("id") : null;
 
@@ -55,7 +54,7 @@ public class Conversation extends AppCompatActivity {
         listViewConversation.setAdapter(myAdapterConversation);
         scrollToBottom();
 
-        messagesList.addAll(dbManager.getMessageDAO().getMsgFrom(number));
+        messagesList = dbManager.getMessageDAO().getMsgFrom(number);
         myAdapterConversation.notifyDataSetChanged();
 
         messageEditText.setOnClickListener((View v) -> scrollToBottom());
