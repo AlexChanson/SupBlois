@@ -14,7 +14,7 @@ public interface IMessageDAO {
     public abstract Message getLastMsgFrom(String sender);
 
     public abstract void newMsg(Message msg);
-    public void newMsg(long msgid, String sender, long date, String content);
+    public void newMsg(long msgid, String sender, long date, String content, boolean receisentved);
 
     public void deleteAllMsgFrom(String sender);
     public abstract void keepOnlyLastMsg(String sender, long numberToKeep);

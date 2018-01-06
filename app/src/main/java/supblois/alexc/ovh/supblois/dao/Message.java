@@ -12,12 +12,14 @@ public class Message {
     private String senderId;
     private String content;
     private Date msgdate;
+    private boolean sent;
 
-    public Message(long msgId, String senderId, Date msgdate, String content) {
+    public Message(long msgId, String senderId, Date msgdate, boolean sent, String content) {
         this.msgId = msgId;
         this.senderId = senderId;
         this.content = content;
         this.msgdate = msgdate;
+        this.sent = sent;
     }
 
     public long getMsgId(){
@@ -37,13 +39,18 @@ public class Message {
         return msgdate;
     }
 
+    public boolean isSent() {
+        return sent;
+    }
+
     @Override
     public String toString(){
         SimpleDateFormat formatter = new SimpleDateFormat();
-        return String.format("id=%d at  sender: %d msg: %d",
+        return String.format("id=%d at: %s sender: %s msg: %s sent: %b",
                 msgId,
                 formatter.format(msgdate),
                 senderId,
-                content.substring(0,20));
+                content,
+                sent);
     }
 }

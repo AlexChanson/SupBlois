@@ -61,20 +61,31 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
             textViewOther = (TextView) rowView.findViewById(R.id.textViewOther);
         }
         System.out.println(message.getSenderId());
-        if (message.getSenderId().equals(id)) {
+        if (message.isSent()) {
 
             if (textViewMe != null) {
                 textViewMe.setText(message.getContent());
                 textViewOther.setText("");
                 textViewOther.setBackground(null);
-            } else {
-                if (textViewOther != null) {
+            } else if (textViewOther != null) {
                     textViewOther.setText(message.getContent());
                     textViewMe.setText("");
                     textViewMe.setBackground(null);
-                }
+            }
+
+        }
+        else {
+            if (textViewMe != null) {
+                textViewOther.setText(message.getContent());
+                textViewMe.setText("");
+                textViewMe.setBackground(null);
+            } else if (textViewOther != null) {
+                textViewMe.setText(message.getContent());
+                textViewOther.setText("");
+                textViewOther.setBackground(null);
             }
         }
+
         return rowView;
     }
 

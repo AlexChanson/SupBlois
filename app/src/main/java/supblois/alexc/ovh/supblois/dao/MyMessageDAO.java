@@ -53,7 +53,8 @@ public class MyMessageDAO implements IMessageDAO {
         String sender = cur.getString(1);
         Date date = new Date(cur.getLong(2));
         String content = cur.getString(3);
-        return new Message(msgId, sender, date, content);
+        boolean sent = cur.getInt(4) != 0;
+        return new Message(msgId, sender, date, sent, content);
     }
 
     @Override
@@ -70,16 +71,17 @@ public class MyMessageDAO implements IMessageDAO {
 
     @Override
     public void newMsg(Message msg) {
-        newMsg(msg.getMsgId(), msg.getSenderId(), msg.getDate().getTime(), msg.getContent());
+        newMsg(msg.getMsgId(), msg.getSenderId(), msg.getDate().getTime(), msg.getContent(), msg.isSent());
     }
 
     @Override
-    public void newMsg(long msgid, String sender, long date, String content) {
+    public void newMsg(long msgid, String sender, long date, String content, boolean sent) {
         ContentValues cv = new ContentValues();
 
         cv.put(MyDB.COLUMN_SENDER, sender);
         cv.put(MyDB.COLUMN_DATE, date);
         cv.put(MyDB.COLUMN_CONTENT, content);
+        cv.put(MyDB.COLUMN_SENT, sent ? 1 : 0);
         database.insert(MyDB.TABLE_MSG, null, cv);
     }
 

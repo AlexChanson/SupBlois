@@ -63,6 +63,7 @@ public class Conversation extends AppCompatActivity {
 
         ArrayList<Message> allMsg = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
         for (Message msg: allMsg){
+            System.out.println(msg.toString());
             messagesList.add(msg);
         }
 
@@ -98,15 +99,16 @@ public class Conversation extends AppCompatActivity {
             if (!messageEditText.getText().toString().equals("")) {
                 boolean result = NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
                 if (result){
+                    Date time = Calendar.getInstance().getTime();
                     Message msg = new Message(0,
-                            getMessageIntent.getStringExtra("id"),
-                            Calendar.getInstance().getTime(),
+                            getMessageIntent.getStringExtra("account"),
+                            time,
+                            true,
                             messageEditText.getText().toString());
-                    messagesList.add(msg);
                     messageEditText.setText("");
 
                     dbManager.getMessageDAO().newMsg(msg);
-
+                    messagesList.add(msg);
                     myAdapterConversation.notifyDataSetChanged();
                     scrollToBottom();
                 }

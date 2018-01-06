@@ -24,12 +24,13 @@ public class MyDB extends SQLiteOpenHelper {
     public static final String COLUMN_SENDER = "sender";
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_CONTENT = "content";
+    public static final String COLUMN_SENT = "sent";
 
     public static final String COLUMN_LOGGED_NUM = "logged_num";
     public static final String COLUMN_LOGGED_PSWD = "password";
 
     //all colums
-    public static final String[] ALLCOLUMNS_MSG = {COLUMN_MSG_ID, COLUMN_SENDER, COLUMN_DATE, COLUMN_CONTENT};
+    public static final String[] ALLCOLUMNS_MSG = {COLUMN_MSG_ID, COLUMN_SENDER, COLUMN_DATE, COLUMN_CONTENT, COLUMN_SENT};
     public static final String[] ALLCOLUMNS_CONNECTED = {COLUMN_LOGGED_NUM, COLUMN_LOGGED_PSWD};
     public static final String[] ALLCOLUMNS_ACCOUNT = {COLUMN_NUM, COLUMN_FIRSTNAME, COLUMN_LASTNAME, COLUMN_UNREAD};
 
@@ -73,7 +74,9 @@ public class MyDB extends SQLiteOpenHelper {
             +
             COLUMN_CONTENT + " Text" + NOTNULL + ", "
             +
-            " UNIQUE ("+COLUMN_MSG_ID+","+COLUMN_SENDER+") "
+            COLUMN_SENT + " INTEGER" + NOTNULL + ", "
+            +
+            " UNIQUE ("+COLUMN_MSG_ID+","+COLUMN_SENDER+","+COLUMN_SENT+") "
             +
             ");";
 
