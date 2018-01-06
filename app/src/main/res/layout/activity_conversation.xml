@@ -30,7 +30,9 @@
         android:layout_above="@+id/editTextMessage"
         android:layout_below="@id/convFirstNameTextView"
         android:foregroundGravity="top"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
 
     <Button
         android:id="@+id/buttonReceive"

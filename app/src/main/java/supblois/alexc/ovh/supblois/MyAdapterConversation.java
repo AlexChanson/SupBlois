@@ -66,10 +66,12 @@ public class MyAdapterConversation extends ArrayAdapter<Message> {
             if (textViewMe != null) {
                 textViewMe.setText(message.getContent());
                 textViewOther.setText("");
+                textViewOther.setBackground(null);
             } else {
                 if (textViewOther != null) {
                     textViewOther.setText(message.getContent());
                     textViewMe.setText("");
+                    textViewMe.setBackground(null);
                 }
             }
         }
