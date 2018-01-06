@@ -41,6 +41,7 @@ public class Conversation extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        messagesList = dbManager.getMessageDAO().getMsgFrom(number);
         messageEditText = findViewById(R.id.editTextMessage);
         listViewConversation = findViewById(R.id.listViewConversation);
         intent = getIntent();
@@ -54,8 +55,6 @@ public class Conversation extends AppCompatActivity {
         listViewConversation.setAdapter(myAdapterConversation);
         scrollToBottom();
 
-        messagesList = dbManager.getMessageDAO().getMsgFrom(number);
-        myAdapterConversation.notifyDataSetChanged();
 
         messageEditText.setOnClickListener((View v) -> scrollToBottom());
         messageEditText.setOnFocusChangeListener((View v, boolean hasFocus) -> {
@@ -88,6 +87,8 @@ public class Conversation extends AppCompatActivity {
             messagesList.addAll(dbManager.getMessageDAO().getMsgFrom(number));
             myAdapterConversation.notifyDataSetChanged();
         });
+
+        myAdapterConversation.notifyDataSetChanged();
     }
 
     @Override
