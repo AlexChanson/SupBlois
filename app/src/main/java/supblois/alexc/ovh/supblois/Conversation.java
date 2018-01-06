@@ -107,6 +107,7 @@ public class Conversation extends AppCompatActivity {
 
         findViewById(R.id.buttonReceive).setOnClickListener(v -> {
             messagesList.clear();
+            Utility.updateMessages(dbManager.getMessageDAO(), number, false);
             messagesList.addAll(dbManager.getMessageDAO().getMsgFrom(number));
             myAdapterConversation.notifyDataSetChanged();
         });

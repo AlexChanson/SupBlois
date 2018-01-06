@@ -1,15 +1,18 @@
 package supblois.alexc.ovh.supblois;
 
-import com.google.gson.Gson;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import supblois.alexc.ovh.supblois.dao.IMessageDAO;
+import supblois.alexc.ovh.supblois.dao.Message;
+import supblois.alexc.ovh.supblois.dao.MyMessageDAO;
 import supblois.alexc.ovh.supblois.network.Command;
+import supblois.alexc.ovh.supblois.network.NetFacade;
 import supblois.alexc.ovh.supblois.network.NetTask;
 
 public class Utility {
@@ -58,5 +61,25 @@ public class Utility {
                 return null;
         }
         return r;
+    }
+
+    public static void updateMessages(IMessageDAO messageDAO, boolean doAll){
+        if (doAll)
+            messageDAO.deleteAll();
+        List<Message> toInsert = NetFacade.pullMessages(doAll);
+        if (toInsert != null) {
+            for (Message message : toInsert)
+                messageDAO.newMsg(message);
+        }
+    }
+
+    public static void updateMessages(IMessageDAO messageDAO, String target, boolean doAll){
+        if (doAll)
+            messageDAO.deleteAllMsgFrom(target);
+        List<Message> toInsert = NetFacade.pullMessages(doAll, target);
+        if (toInsert != null){
+            for (Message message : toInsert)
+                messageDAO.newMsg(message);
+        }
     }
 }

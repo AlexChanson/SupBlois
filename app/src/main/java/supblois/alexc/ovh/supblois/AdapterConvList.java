@@ -7,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import supblois.alexc.ovh.supblois.dao.MyDB;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.dao.RegAccount;
 
@@ -22,7 +20,7 @@ import supblois.alexc.ovh.supblois.dao.RegAccount;
  * Created by Christopher on 02/01/2018.
  */
 
-public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
+public class AdapterConvList extends ArrayAdapter<RegAccount> {
     private Context context;
     private List<RegAccount> regAccountsList = new ArrayList<>();
     TextView textViewFirstName;
@@ -32,7 +30,7 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
     Activity parentActivity;
 
 
-    public MyAdapterMessage (Context context, int ressource,List<RegAccount> regAccountsList, Activity parentActivity) {
+    public AdapterConvList(Context context, int ressource, List<RegAccount> regAccountsList, Activity parentActivity) {
         super(context, ressource);
         this.regAccountsList = regAccountsList;
         this.context = context;
@@ -109,7 +107,7 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
             intent.putExtra("account", regAccount.getNum());
             intent.putExtra("firstname", regAccount.getFirstName());
             intent.putExtra("lastname", regAccount.getLastName());
-            System.out.println("Going into conversation mode");
+
             Intent parentIntent = parentActivity.getIntent();
             intent.putExtra("id", parentIntent.getStringExtra("id"));
             parentActivity.startActivity(intent);
@@ -123,7 +121,7 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
             deleteButton.setOnClickListener(view1 -> {
                 MyDbManager.getInstance(context).getAccountDAO().deleteByNumber(regAccount != null ? regAccount.getNum() : null);
                 regAccountsList.remove(i);
-                MyAdapterMessage.this.notifyDataSetChanged();
+                AdapterConvList.this.notifyDataSetChanged();
             });
         }
 

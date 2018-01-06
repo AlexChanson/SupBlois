@@ -1,34 +1,21 @@
 package supblois.alexc.ovh.supblois;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
 import supblois.alexc.ovh.supblois.dao.RegAccount;
-import supblois.alexc.ovh.supblois.network.NetTask;
 
 public class Messages extends AppCompatActivity {
     private ListView listViewMessage;
-    private MyAdapterMessage myAdapterMessage;
+    private AdapterConvList adapterConvList;
     private MyDbManager dbManager;
 
     public void init() {
@@ -47,10 +34,10 @@ public class Messages extends AppCompatActivity {
         init();
         listViewMessage = (ListView)findViewById(R.id.listViewMessage);
         List<RegAccount> regAccountsList = dbManager.getAccountDAO().getAll();
-        myAdapterMessage = new MyAdapterMessage(this, R.layout.layout_messages, regAccountsList, this);
-        listViewMessage.setAdapter(myAdapterMessage);
+        adapterConvList = new AdapterConvList(this, R.layout.layout_messages, regAccountsList, this);
+        listViewMessage.setAdapter(adapterConvList);
 
-        myAdapterMessage.notifyDataSetChanged();
+        adapterConvList.notifyDataSetChanged();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             Intent intentAdd = new Intent(getBaseContext(), Add.class);
