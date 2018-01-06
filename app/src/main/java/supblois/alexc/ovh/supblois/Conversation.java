@@ -48,6 +48,8 @@ public class Conversation extends AppCompatActivity {
         listViewConversation = findViewById(R.id.listViewConversation);
 
 
+
+
         String firstname = intent.getStringExtra("firstname");
         String lastname = intent.getStringExtra("lastname");
 

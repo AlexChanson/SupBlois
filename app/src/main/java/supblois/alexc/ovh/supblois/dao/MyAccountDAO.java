@@ -55,8 +55,8 @@ public class MyAccountDAO implements IAccountDAO {
 
     @Override
     public RegAccount getByNumber(String number) {
-        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, MyDB.COLUMN_NUM+"="+number,
-                null, null, null, null);
+        Cursor cursor = database.query(MyDB.TABLE_ACCOUNT, MyDB.ALLCOLUMNS_ACCOUNT, MyDB.COLUMN_NUM+"=?",
+                new String[] {number}, null, null, null);
         if (cursor.getCount() >= 1){
             cursor.moveToNext();
             RegAccount ret = new RegAccount(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3));
