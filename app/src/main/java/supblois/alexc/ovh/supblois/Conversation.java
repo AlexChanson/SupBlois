@@ -10,12 +10,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import supblois.alexc.ovh.supblois.dao.Message;
 import supblois.alexc.ovh.supblois.dao.MyDbManager;
@@ -26,11 +23,9 @@ public class Conversation extends AppCompatActivity {
     private Button sendButton;
     private ListView listViewConversation;
     private MyDbManager dbManager;
-    private Intent getMessageIntent;
+    private Intent intent;
     private MyAdapterConversation myAdapterConversation;
     private List<Message> messagesList;
-    private TextView convFirstNameView;
-    private TextView convLastNameView;
 
     public void scrollToBottom(){
         listViewConversation.setSelection(myAdapterConversation.getCount() - 1);
@@ -44,24 +39,25 @@ public class Conversation extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        messageEditText = (EditText) findViewById(R.id.editTextMessage);
-        sendButton = (Button) findViewById(R.id.buttonSend);
-        listViewConversation = (ListView) findViewById(R.id.listViewConversation);
-        getMessageIntent = getIntent();
-        messagesList = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
-        convFirstNameView = findViewById(R.id.convFirstNameTextView);
-        convLastNameView = findViewById(R.id.convLastNameTextView);
+        messageEditText = findViewById(R.id.editTextMessage);
+        sendButton = findViewById(R.id.buttonSend);
+        listViewConversation = findViewById(R.id.listViewConversation);
+        intent = getIntent();
+        String number = intent.getStringExtra("account");
+        String firstname = intent.getStringExtra("firstname");
+        String lastname = intent.getStringExtra("lastname");
+        messagesList = dbManager.getMessageDAO().getMsgFrom(number);
 
         String id = null;
-        if (getMessageIntent != null){
-            id = getMessageIntent.getStringExtra("id");
+        if (intent != null){
+            id = intent.getStringExtra("id");
         }
 
         myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
         listViewConversation.setAdapter(myAdapterConversation);
         scrollToBottom();
 
-        ArrayList<Message> allMsg = dbManager.getMessageDAO().getMsgFrom(getMessageIntent.getStringExtra("account"));
+        ArrayList<Message> allMsg = dbManager.getMessageDAO().getMsgFrom(number);
         for (Message msg: allMsg){
             System.out.println(msg.toString());
             messagesList.add(msg);
@@ -73,6 +69,8 @@ public class Conversation extends AppCompatActivity {
         messageEditText.setOnFocusChangeListener((View v, boolean hasFocus) -> {
             if (hasFocus) scrollToBottom();
         });
+
+        setTitle((firstname != null) ? firstname + " " + lastname.toUpperCase() : number);
     }
 
     @Override
@@ -83,21 +81,9 @@ public class Conversation extends AppCompatActivity {
         setContentView(R.layout.activity_conversation);
         init();
 
-
-        String firstname = getMessageIntent.getStringExtra("firstname");
-        String lastname = getMessageIntent.getStringExtra("lastname");
-
-        if (firstname.equals("") && lastname.equals("")){
-            convFirstNameView.setText(getMessageIntent.getStringExtra("account"));
-        }
-        else{
-            convFirstNameView.setText(firstname);
-            convLastNameView.setText(lastname);
-        }
-
         sendButton.setOnClickListener(view -> {
             if (!messageEditText.getText().toString().equals("")) {
-                boolean result = NetFacade.pushMessage(messageEditText.getText().toString(), getMessageIntent.getStringExtra("account"));
+                boolean result = NetFacade.pushMessage(messageEditText.getText().toString(), intent.getStringExtra("account"));
                 if (result){
                     Date time = Calendar.getInstance().getTime();
                     Message msg = new Message(0,

@@ -34,13 +34,13 @@ public class MsgNotificationManager {
         return mInstance;
     }
 
-    public void displayNotification(String title, String body) {
+    public void displayNotification(String number, String message) {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(mCtx, "messages")
                         .setSmallIcon(R.drawable.notif_icon)
-                        .setContentTitle(title)
-                        .setContentText(body)
+                        .setContentTitle(number)
+                        .setContentText(message)
                         .setLights(Color.CYAN, 500, 250)
                         .setVibrate(new long[]{500, 1000})
                         .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
@@ -48,7 +48,8 @@ public class MsgNotificationManager {
 
         Intent resultIntent = new Intent(mCtx, Conversation.class);
         resultIntent.setAction("SHOW_MESSAGE");
-        resultIntent.putExtra("PHONE_NB", title);
+        resultIntent.putExtra("PHONE_NB", number);
+        resultIntent.putExtra("account", number);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 

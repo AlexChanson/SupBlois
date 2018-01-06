@@ -28,7 +28,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/editTextMessage"
-        android:layout_below="@id/convFirstNameTextView"
         android:foregroundGravity="top"
         android:layout_centerHorizontal="true"
         android:divider="@null"
@@ -42,24 +41,4 @@
         android:layout_below="@+id/listViewConversation"
         android:text="@string/receive_message" />
 
-    <TextView
-        android:id="@+id/convFirstNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
-        android:text="TextView"
-        android:textColor="@color/text_color"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/convLastNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp"
-        android:textStyle="bold"
-        android:textColor="@color/text_color"
-        android:layout_toEndOf="@id/convFirstNameTextView"
-        android:text="TextView" />
 </RelativeLayout>
