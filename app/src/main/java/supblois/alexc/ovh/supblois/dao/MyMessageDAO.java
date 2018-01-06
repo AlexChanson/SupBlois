@@ -87,7 +87,7 @@ public class MyMessageDAO implements IMessageDAO {
 
     @Override
     public void deleteAllMsgFrom(String sender) {
-        database.delete(MyDB.TABLE_MSG, MyDB.COLUMN_SENDER+"=?", new String[] {sender});
+        database.delete(MyDB.TABLE_MSG, MyDB.COLUMN_SENDER+"=? and "+MyDB.COLUMN_SENT+"!=1", new String[] {sender});
     }
 
     @Override
@@ -100,6 +100,6 @@ public class MyMessageDAO implements IMessageDAO {
 
     @Override
     public void deleteAll(){
-        database.delete(MyDB.TABLE_MSG, null, null);
+        database.delete(MyDB.TABLE_MSG, MyDB.COLUMN_SENT+"!=1", null);
     }
 }
