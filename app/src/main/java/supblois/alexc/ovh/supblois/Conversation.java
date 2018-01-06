@@ -21,18 +21,19 @@ import supblois.alexc.ovh.supblois.network.NetFacade;
 
 public class Conversation extends AppCompatActivity {
     private EditText messageEditText;
-    private Button sendButton;
     private ListView listViewConversation;
     private MyDbManager dbManager;
     private Intent intent;
     private MyAdapterConversation myAdapterConversation;
     private List<Message> messagesList;
+    String number;
 
     public void scrollToBottom(){
         listViewConversation.setSelection(myAdapterConversation.getCount() - 1);
     }
 
     public void init() {
+        setContentView(R.layout.activity_conversation);
         dbManager = MyDbManager.getInstance(this);
         try {
             dbManager.open();
@@ -41,29 +42,20 @@ public class Conversation extends AppCompatActivity {
         }
 
         messageEditText = findViewById(R.id.editTextMessage);
-        sendButton = findViewById(R.id.buttonSend);
         listViewConversation = findViewById(R.id.listViewConversation);
         intent = getIntent();
-        String number = intent.getStringExtra("account");
+        number = intent.getStringExtra("account");
         String firstname = intent.getStringExtra("firstname");
         String lastname = intent.getStringExtra("lastname");
         messagesList = dbManager.getMessageDAO().getMsgFrom(number);
 
-        String id = null;
-        if (intent != null){
-            id = intent.getStringExtra("id");
-        }
+        String id = intent != null ? intent.getStringExtra("id") : null;
 
         myAdapterConversation = new MyAdapterConversation(this, R.layout.activity_conversation, messagesList, id);
         listViewConversation.setAdapter(myAdapterConversation);
         scrollToBottom();
 
-        ArrayList<Message> allMsg = dbManager.getMessageDAO().getMsgFrom(number);
-        for (Message msg: allMsg){
-            System.out.println(msg.toString());
-            messagesList.add(msg);
-        }
-
+        messagesList.addAll(dbManager.getMessageDAO().getMsgFrom(number));
         myAdapterConversation.notifyDataSetChanged();
 
         messageEditText.setOnClickListener((View v) -> scrollToBottom());
@@ -72,28 +64,18 @@ public class Conversation extends AppCompatActivity {
         });
 
         setTitle((firstname != null) ? firstname + " " + lastname.toUpperCase() : number);
-    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        System.out.println("onCreate CALLED");
-
-        setContentView(R.layout.activity_conversation);
-        init();
-
-        sendButton.setOnClickListener(view -> {
-            if (!messageEditText.getText().toString().equals("")) {
-                boolean result = NetFacade.pushMessage(messageEditText.getText().toString(), intent.getStringExtra("account"));
-                if (result){
+        findViewById(R.id.buttonSend).setOnClickListener(view -> {
+            String toSend = messageEditText.getText().toString();
+            if (!toSend.equals("")) {
+                if (NetFacade.pushMessage(toSend, number)){
                     Date time = Calendar.getInstance().getTime();
                     Message msg = new Message(0,
-                            intent.getStringExtra("account"),
+                            number,
                             time,
                             true,
-                            messageEditText.getText().toString());
+                            toSend);
                     messageEditText.setText("");
-
                     dbManager.getMessageDAO().newMsg(msg);
                     messagesList.add(msg);
                     myAdapterConversation.notifyDataSetChanged();
@@ -103,9 +85,16 @@ public class Conversation extends AppCompatActivity {
         });
 
         findViewById(R.id.buttonReceive).setOnClickListener(v -> {
-            //TODO forcer rafraichir la conv
+            messagesList.clear();
+            messagesList.addAll(dbManager.getMessageDAO().getMsgFrom(number));
+            myAdapterConversation.notifyDataSetChanged();
         });
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
     }
 
     @Override

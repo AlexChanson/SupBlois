@@ -68,13 +68,13 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
         }
 
         if (regAccount != null) {
-            textViewFirstName = (TextView) rowView.findViewById(R.id.textViewFirstName);
-            textViewLastName = (TextView) rowView.findViewById(R.id.textViewLastName);
-            textViewUnread = (TextView) rowView.findViewById(R.id.unreadTextView);
-            deleteButton = (ImageButton) rowView.findViewById(R.id.deleteAccountButton);
+            textViewFirstName = rowView.findViewById(R.id.textViewFirstName);
+            textViewLastName = rowView.findViewById(R.id.textViewLastName);
+            textViewUnread = rowView.findViewById(R.id.unreadTextView);
+            deleteButton = rowView.findViewById(R.id.deleteAccountButton);
         }
 
-        if (regAccount.getNum() == null || regAccount.getNum().equals("")){
+        if (regAccount == null || regAccount.getNum() == null || regAccount.getNum().equals("")){
             if (textViewFirstName != null){
                 textViewFirstName.setText("NUMBER ERROR");
             }
@@ -114,13 +114,15 @@ public class MyAdapterMessage extends ArrayAdapter<RegAccount> {
             intent.putExtra("id", parentIntent.getStringExtra("id"));
             parentActivity.startActivity(intent);
         };
-        textViewFirstName.setOnClickListener(lmda);
-        textViewLastName.setOnClickListener(lmda);
+        if (textViewFirstName != null)
+            textViewFirstName.setOnClickListener(lmda);
+        if (textViewLastName != null)
+            textViewLastName.setOnClickListener(lmda);
 
         if (deleteButton != null) {
             deleteButton.setOnClickListener(view1 -> {
-                Boolean result = MyDbManager.getInstance(context).getAccountDAO().deleteByNumber(regAccount.getNum());
-                RegAccount deleted = regAccountsList.remove(i);
+                MyDbManager.getInstance(context).getAccountDAO().deleteByNumber(regAccount != null ? regAccount.getNum() : null);
+                regAccountsList.remove(i);
                 MyAdapterMessage.this.notifyDataSetChanged();
             });
         }

@@ -146,6 +146,8 @@ public class MyAccountDAO implements IAccountDAO {
 
     @Override
     public boolean deleteByNumber(String number) {
+        if(number == null)
+            return false;
         String strFilter = MyDB.COLUMN_NUM + "=?";
         int nDeleted = database.delete(MyDB.TABLE_ACCOUNT, strFilter, new String[] {number});
         if (nDeleted < 1){
